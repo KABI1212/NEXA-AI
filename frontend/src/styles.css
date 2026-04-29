@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0b1f44;
+  background: #f6f9ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: Inter, Poppins, sans-serif;
+}
+
+.blue-gradient {
+  background: linear-gradient(135deg, #12c8ff 0%, #1263ff 48%, #4731e8 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.dashboard-shell {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(18, 200, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, #06142f 0%, #071a3d 52%, #081126 100%);
+}
+
+.certificate {
+  width: min(1120px, 100%);
+  aspect-ratio: 1.414 / 1;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  color: #091f44;
+  font-family: "Times New Roman", serif;
+  border: 2px solid #d6a233;
+  box-shadow: 0 20px 70px rgba(8, 24, 55, 0.18);
+}
+
+.certificate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(130deg, #06286d 0 12%, transparent 12.2%),
+    linear-gradient(138deg, transparent 0 72%, #06286d 72.2% 100%);
+  pointer-events: none;
+}
+
+.certificate::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid #d6a233;
+  pointer-events: none;
+}
+
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d6a233, transparent);
+}

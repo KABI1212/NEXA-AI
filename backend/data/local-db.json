@@ -1,0 +1,437 @@
+{
+  "users": [
+    {
+      "_id": "8541bc4b-d654-45a7-9468-6970cc1b929d",
+      "name": "Nexa Admin",
+      "email": "admin@nexa.ai",
+      "phone": "9999999999",
+      "password": "$2a$12$sqzA5SBxQXonTrthFsZXTewMGpAO5vDoMTc1W4dZ11CotPgN6ODNO",
+      "role": "admin",
+      "verified": true,
+      "active": true,
+      "aiUses": 0,
+      "onboarding": null,
+      "createdAt": "2026-04-28T16:53:12.981Z",
+      "updatedAt": "2026-04-28T16:53:12.981Z"
+    },
+    {
+      "active": true,
+      "aiUses": 0,
+      "onboarding": {
+        "qualification": "",
+        "department": "",
+        "skills": [],
+        "interests": [],
+        "experience": "",
+        "dreamJob": "",
+        "dreamCompany": "",
+        "preferredCountry": "",
+        "salaryGoal": ""
+      },
+      "name": "kabi",
+      "email": "kabileshk702@gmail.com",
+      "phone": "student",
+      "password": "$2a$12$Hdvsxa/TJqPkiLQbdiZgcOy8P5uA3bv96/yqQxUJ12SmLmSr2UrNK",
+      "role": "student",
+      "verified": true,
+      "otp": "830737",
+      "otpExpires": "2026-04-28T17:03:15.901Z",
+      "_id": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "createdAt": "2026-04-28T16:53:15.905Z",
+      "updatedAt": "2026-04-28T16:53:25.913Z"
+    },
+    {
+      "active": true,
+      "aiUses": 0,
+      "onboarding": null,
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "phone": "9876543210",
+      "password": "$2a$12$yp5IzyiXSOgH478Ow.EcJeqfTRQdMYiG3BSe.qIIYnh2LVJgpNtuC",
+      "role": "student",
+      "verified": false,
+      "otp": "601211",
+      "otpExpires": "2026-04-28T17:07:10.106Z",
+      "_id": "b7dab6b6-bc9d-4557-956b-0e0be7cc55f8",
+      "createdAt": "2026-04-28T16:57:10.109Z",
+      "updatedAt": "2026-04-28T16:57:10.109Z"
+    },
+    {
+      "active": true,
+      "aiUses": 0,
+      "onboarding": {
+        "dreamCompany": "OpenAI",
+        "experience": "Fresher",
+        "skills": [
+          "React",
+          "Node.js"
+        ],
+        "dreamJob": "Full Stack Developer",
+        "preferredCountry": "India",
+        "salaryGoal": "10 LPA",
+        "interests": [
+          "AI",
+          "Backend"
+        ],
+        "department": "CSE",
+        "qualification": "B.Tech"
+      },
+      "name": "Flow User",
+      "email": "flowuser@example.com",
+      "phone": "9998887776",
+      "password": "$2a$12$1xHuyDK/KD5vm8YvLi6QPOsf9EfqYbvbZFYl2pQE8DokqxjY3yxRi",
+      "role": "student",
+      "verified": true,
+      "otp": "131962",
+      "otpExpires": "2026-04-28T17:07:27.963Z",
+      "_id": "092cab30-20e9-490f-bcd8-cda492af8146",
+      "createdAt": "2026-04-28T16:57:27.967Z",
+      "updatedAt": "2026-04-28T16:57:28.061Z"
+    }
+  ],
+  "courses": [
+    {
+      "_id": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
+      "title": "Full Stack Web Development",
+      "slug": "full-stack-web-development",
+      "category": "Web Development",
+      "instructor": "Prof. Rahul Sharma",
+      "level": "Beginner to Advanced",
+      "price": 0,
+      "premium": false,
+      "description": "Master React, Node.js, Express, MongoDB, deployment, interviews, and portfolio projects.",
+      "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      "modules": [
+        {
+          "_id": "5c041c7d-2532-4850-a230-b12a4fa02ed1",
+          "title": "HTML, CSS and JavaScript Foundations",
+          "duration": "52m",
+          "assignment": "Build a responsive landing page",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
+          "title": "React and Component Architecture",
+          "duration": "1h 20m",
+          "assignment": "Build a dashboard UI",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
+          "title": "Node, Express and MongoDB APIs",
+          "duration": "1h 35m",
+          "assignment": "Create REST API with auth",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "43085dcb-74ed-4783-83fe-18f4047430e4",
+          "title": "Deployment and Career Portfolio",
+          "duration": "48m",
+          "assignment": "Deploy full-stack app",
+          "videoUrl": "",
+          "notesUrl": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Which library builds UI components?",
+          "options": [
+            "React",
+            "MongoDB",
+            "JWT"
+          ],
+          "answer": "React"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "Which pattern protects APIs?",
+          "options": [
+            "JWT auth",
+            "Inline CSS",
+            "Console logs"
+          ],
+          "answer": "JWT auth"
+        }
+      ],
+      "published": true,
+      "createdAt": "2026-04-28T16:53:12.982Z",
+      "updatedAt": "2026-04-28T16:53:12.982Z"
+    },
+    {
+      "_id": "8f6148c5-823a-4436-86c4-5b434fb80c94",
+      "title": "AI and Machine Learning Career Track",
+      "slug": "ai-machine-learning-career-track",
+      "category": "AI / Machine Learning",
+      "instructor": "Dr. Meera Iyer",
+      "level": "Beginner",
+      "price": 0,
+      "premium": false,
+      "description": "Python, ML basics, model evaluation, prompt engineering, and AI product thinking.",
+      "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+      "modules": [
+        {
+          "_id": "ca46b8e1-0832-4f85-93c0-40fbc71c4ebc",
+          "title": "AI Foundations",
+          "duration": "45m",
+          "assignment": "",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "b96e455a-5ce4-415e-aebc-9b0b1a46990c",
+          "title": "ML Projects",
+          "duration": "1h",
+          "assignment": "",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "9b10ddbc-1930-4259-afa2-f57882ee8d44",
+          "title": "Prompt Engineering",
+          "duration": "40m",
+          "assignment": "",
+          "videoUrl": "",
+          "notesUrl": ""
+        }
+      ],
+      "quiz": [],
+      "finalTest": [],
+      "published": true,
+      "createdAt": "2026-04-28T16:53:12.982Z",
+      "updatedAt": "2026-04-28T16:53:12.982Z"
+    },
+    {
+      "_id": "0ec7b27c-576e-416d-bc08-933c68ace194",
+      "title": "Placement Prep and Communication",
+      "slug": "placement-prep-communication",
+      "category": "Placement Prep",
+      "instructor": "Ananya Rao",
+      "level": "Beginner",
+      "price": 0,
+      "premium": false,
+      "description": "Aptitude, resume writing, HR answers, and confidence-building practice.",
+      "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978",
+      "modules": [
+        {
+          "_id": "be8be885-e6ad-4567-a39a-f842b9e27c9f",
+          "title": "Aptitude Basics",
+          "duration": "35m",
+          "assignment": "",
+          "videoUrl": "",
+          "notesUrl": ""
+        },
+        {
+          "_id": "72bf8000-4db5-4612-b939-1483784841d4",
+          "title": "HR Interview Answers",
+          "duration": "42m",
+          "assignment": "",
+          "videoUrl": "",
+          "notesUrl": ""
+        }
+      ],
+      "quiz": [],
+      "finalTest": [],
+      "published": true,
+      "createdAt": "2026-04-28T16:53:12.982Z",
+      "updatedAt": "2026-04-28T16:53:12.982Z"
+    },
+    {
+      "price": 0,
+      "premium": false,
+      "published": true,
+      "modules": [
+        {
+          "_id": "6e89bd62-14aa-4498-b408-30616dd487f4",
+          "title": "Intro",
+          "videoUrl": "",
+          "duration": "30m",
+          "notesUrl": "",
+          "assignment": ""
+        }
+      ],
+      "quiz": [],
+      "finalTest": [],
+      "slug": "testing-course",
+      "description": "Created from API test",
+      "instructor": "QA Mentor",
+      "category": "Web Development",
+      "title": "Testing Course",
+      "_id": "f8eeaf2a-356d-43bc-ad17-aa26cf70a2b5",
+      "createdAt": "2026-04-28T16:58:12.000Z",
+      "updatedAt": "2026-04-28T16:58:12.000Z"
+    }
+  ],
+  "progress": [
+    {
+      "watchedModules": [
+        "5c041c7d-2532-4850-a230-b12a4fa02ed1",
+        "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
+        "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
+        "43085dcb-74ed-4783-83fe-18f4047430e4"
+      ],
+      "assignmentsDone": true,
+      "quizPassed": true,
+      "finalPassed": true,
+      "quizScore": 92,
+      "finalScore": 94,
+      "percentage": 100,
+      "completed": true,
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
+      "_id": "90f50238-18c8-42d5-82a9-15a57400bc78",
+      "createdAt": "2026-04-28T16:55:47.391Z",
+      "updatedAt": "2026-04-28T16:55:49.754Z"
+    },
+    {
+      "watchedModules": [
+        "5c041c7d-2532-4850-a230-b12a4fa02ed1",
+        "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
+        "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
+        "43085dcb-74ed-4783-83fe-18f4047430e4"
+      ],
+      "assignmentsDone": true,
+      "quizPassed": true,
+      "finalPassed": true,
+      "quizScore": 92,
+      "finalScore": 94,
+      "percentage": 100,
+      "completed": true,
+      "userId": "092cab30-20e9-490f-bcd8-cda492af8146",
+      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
+      "_id": "23acecfb-79a6-444e-b469-5f4fc2a9da7a",
+      "createdAt": "2026-04-28T16:57:28.135Z",
+      "updatedAt": "2026-04-28T16:57:28.139Z"
+    }
+  ],
+  "certificates": [
+    {
+      "verified": true,
+      "ceoName": "Kabilesh",
+      "issueDate": "2026-04-28T16:55:47.471Z",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
+      "certificateId": "NXA-2026-76561",
+      "studentName": "kabi",
+      "courseName": "Full Stack Web Development",
+      "instructorName": "Prof. Rahul Sharma",
+      "score": 93,
+      "qrUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4AewaftIAAATnSURBVO3BQY4jRxAEwfAC//9l1xzzVECjk7PSKszwR6qWnFQtOqladFK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYs+eQnIb1JzA+RGzRNAJjUTkEnNDZAbNROQ36TmjZOqRSdVi06qFn2yTM0mIE+omYBMQCY1E5BJzQTkBsikZlIzAXlCzSYgm06qFp1ULTqpWvTJlwF5Qs0TQCY1k5obIE+oeQLINwF5Qs03nVQtOqladFK16JO/DJA31NwAeULNBGRS8zc5qVp0UrXopGrRJ38ZNTdANqm5AfJ/clK16KRq0UnVok++TM1vAnKjZgIyAZnU3ACZ1ExqboBMap5Q829yUrXopGrRSdWiT5YB+ZPUTECeUDMBmdRMQG6ATGreAPJvdlK16KRq0UnVIvyR/zAgN2omIJOaJ4BMap4AMqn5m5xULTqpWnRSteiTl4BMaiYgm9RMaiYgE5BJzQTkRs0TQCY1k5oJyKRmArJJzTedVC06qVp0UrXokz9MzQRkUvOEmgnIBGRSMwGZgDyh5gbIpGYC8oaaJ4BMat44qVp0UrXopGrRJ79MzRNAbtRMQCY1E5AJyKTmBsgNkBs1E5An1ExA3lCz6aRq0UnVopOqRfgjLwB5Q80EZFLzBpAbNROQN9RMQN5QMwGZ1DwBZFKz6aRq0UnVopOqRfgjXwRkUnMD5EbNBGRSMwGZ1DwBZFIzAblRcwNkUvMGkBs133RSteikatFJ1SL8kReA3KiZgExq3gByo2YCMql5AsgmNROQN9RMQCY1E5BJzRsnVYtOqhadVC36ZJmaCcgTQG7U3Ki5UfOGmieATGomIJOaCcg3qdl0UrXopGrRSdWiT75MzQTkRs03AZnU3AB5Qs2k5kbNE2omIDdqJiCTmk0nVYtOqhadVC3CH/mDgExqJiA3aiYgk5oJyI2aJ4DcqLkBMqnZBGRS800nVYtOqhadVC365CUgm4BMap5Qc6PmBsik5gk1E5AbNTdAvgnIpOaNk6pFJ1WLTqoWfbJMzQRkUjMBmdRMQCY1N0CeUHMDZFIzqZmATGpugNyomYBMaiYgT6jZdFK16KRq0UnVok/+MDU3av4kNU+omYBMam7UTEAmNROQSc0NkEnNppOqRSdVi06qFn3yZWomIJOaCcgTaiY1N0Bu1ExAJjUTkBs1TwC5AfIEkBsgk5o3TqoWnVQtOqlahD/yHwbkRs0NkEnNG0AmNROQGzVPANmk5o2TqkUnVYtOqhZ98hKQ36RmUvMEkEnNJjUTkDeATGreUPNNJ1WLTqoWnVQt+mSZmk1AboBMajYBmdRMQCY1k5obIDdq3lAzAZnUbDqpWnRSteikatEnXwbkCTVvAJnUTGqeUDMBmdRMQG7U3AB5Q80EZFIzAZnUvHFSteikatFJ1aJP6grIpOZGzQTkCTVvAHlCzaaTqkUnVYtOqhZ98j8DZFLzBpBJzSYgT6i5ATKp2XRSteikatFJ1aJPvkzNN6mZgExAJjVPqNkE5Ak1E5BJzQRkUvObTqoWnVQtOqla9MkyIL8JyI2aJ4BMap4AMql5Asik5gk1E5BJzTedVC06qVp0UrUIf6RqyUnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC06qVp0UrXoH6kZZAtm/L00AAAAAElFTkSuQmCC",
+      "_id": "ce55ad7d-10cc-4f7b-83d3-5e7f4422cbfd",
+      "createdAt": "2026-04-28T16:55:47.471Z",
+      "updatedAt": "2026-04-28T16:55:47.471Z"
+    },
+    {
+      "verified": true,
+      "ceoName": "Kabilesh",
+      "issueDate": "2026-04-28T16:57:28.176Z",
+      "userId": "092cab30-20e9-490f-bcd8-cda492af8146",
+      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
+      "certificateId": "NXA-2026-77412",
+      "studentName": "Flow User",
+      "courseName": "Full Stack Web Development",
+      "instructorName": "Prof. Rahul Sharma",
+      "score": 93,
+      "qrUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4AewaftIAAATVSURBVO3BQW4ERxIEwfDC/P/LvjzmXgpodA4hUWGGP1K15KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC06qVr0yUtAfpOaJ4BMaiYgk5oJyKRmAjKpuQFyo2YC8pvUvHFSteikatFJ1aJPlqnZBOQNNROQSc0EZFIzAbkBMqmZ1ExAnlCzCcimk6pFJ1WLTqoWffJlQJ5Q8wSQSc03qXkCyDcBeULNN51ULTqpWnRSteiT+j9qboA8oWYCMqn5S06qFp1ULTqpWvTJHwPkRs0EZFLzhJobIP8lJ1WLTqoWnVQt+uTL1PwmNROQN4DcAJnUTGpugExqnlDzT3JSteikatFJ1aJPlgH5y9RMQG6ATGreAPJPdlK16KRq0UnVIvyRfzEgN2o2AZnUPAFkUvOXnFQtOqladFK16JOXgExqJiCb1ExqJiATkBs1E5BJzRNAJjWTmgnIpGYCsknNN51ULTqpWnRSteiTZUAmNTdAJjVPAJnUTEB+k5obIJOaCcgbap4AMql546Rq0UnVopOqRZ+8pGYC8gaQGzWTmgnIG2omIE8AuVEzAXlCzQTkDTWbTqoWnVQtOqla9MkyNTdAJjUTkEnNBOQJNROQTUAmNROQCcgTaiYgk5ongExqNp1ULTqpWnRStQh/5B8EyI2aTUAmNROQSc0E5EbNDZBJzRtAbtR800nVopOqRSdVi/BHvgjIjZrfBGRS8wSQTWomIG+omYBMaiYgk5o3TqoWnVQtOqla9MlLQJ5QMwF5Qs0EZFIzAXkCyKRmUvMEkEnNBGRSMwH5JjWbTqoWnVQtOqlahD/yApBJzQTkRs1vAnKj5gbIjZpNQCY1E5BJzQ2QSc2mk6pFJ1WLTqoW4Y8sAnKjZgLyhJobIDdqJiCTmieA3Ki5ATKp2QRkUvNNJ1WLTqoWnVQt+uQlIN+k5gk1E5AngExqnlAzAblRcwPkm4BMat44qVp0UrXopGoR/sgLQCY1N0C+Sc0EZJOaGyCTmhsgN2omIJOaCciNmm86qVp0UrXopGrRJ18G5EbNBGRS8wSQJ9RMQCY1T6iZgExqbtRMQCY1E5BJzQ2QSc2mk6pFJ1WLTqoWffLL1NyomYDcqJnUTEAmNROQSc0EZFIzAblR8wSQGyBPALkBMql546Rq0UnVopOqRfgj/2JAJjU3QCY1m4BMaiYgN2qeALJJzRsnVYtOqhadVC365CUgv0nNpGYCMqmZ1HyTmgnIG0AmNW+o+aaTqkUnVYtOqhZ9skzNJiA3QN4AMqmZgExqJiCTmknNDZAbNW+omYBMajadVC06qVp0UrXoky8D8oSabwLyhJoJyKRmAnKj5gbIG2omIJOaCcik5o2TqkUnVYtOqhZ98scBmdTcALlRc6NmAvKEmjeAPKFm00nVopOqRSdViz75Y9TcAHlCzQ2QSc0mIE+ouQEyqdl0UrXopGrRSdWiT75MzTepmYDcqJmATGq+CcgTaiYgk5oJyKTmN51ULTqpWnRSteiTZUB+E5AngExqboBMam6ATGqeADKpeULNBGRS800nVYtOqhadVC3CH6laclK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC36H+VMRygO+Ni3AAAAAElFTkSuQmCC",
+      "_id": "8b229645-c7c2-46bf-9cc5-e6d5ba7d1200",
+      "createdAt": "2026-04-28T16:57:28.176Z",
+      "updatedAt": "2026-04-28T16:57:28.176Z"
+    }
+  ],
+  "reports": [
+    {
+      "_id": "5ae24788-e253-4b57-b807-86d1985c6665",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-04-28T16:53:32.717Z",
+      "updatedAt": "2026-04-28T16:53:32.717Z"
+    },
+    {
+      "_id": "102b7ff8-aba9-40dc-b949-e9ef56343e10",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-04-28T16:55:33.480Z",
+      "updatedAt": "2026-04-28T16:55:33.480Z"
+    },
+    {
+      "_id": "640c7176-54b2-4c2f-a3f1-943c20258d6d",
+      "userId": "092cab30-20e9-490f-bcd8-cda492af8146",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-04-28T16:58:21.569Z",
+      "updatedAt": "2026-04-28T16:58:21.569Z"
+    }
+  ],
+  "tickets": []
+}
