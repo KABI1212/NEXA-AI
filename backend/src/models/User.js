@@ -16,15 +16,44 @@ const onboardingSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const sessionSchema = new mongoose.Schema(
+  {
+    sessionId: { type: String, required: true },
+    refreshTokenHash: { type: String, required: true },
+    userAgent: String,
+    ip: String,
+    createdAt: { type: Date, default: Date.now },
+    lastUsedAt: { type: Date, default: Date.now },
+    expiresAt: Date,
+    revokedAt: Date
+  },
+  { _id: false }
+);
+
+const loginHistorySchema = new mongoose.Schema(
+  {
+    success: Boolean,
+    ip: String,
+    userAgent: String,
+    reason: String,
+    createdAt: { type: Date, default: Date.now }
+  },
+  { _id: false }
+);
+
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     phone: { type: String, trim: true },
     password: { type: String, required: true, minlength: 8, select: false },
-    role: { type: String, enum: ["student", "fresher", "professional", "career-switcher", "job-seeker", "admin"], default: "student" },
+    role: { type: String, enum: ["student", "fresher", "professional", "career-switcher", "job-seeker", "mentor", "admin"], default: "student" },
     verified: { type: Boolean, default: false },
     active: { type: Boolean, default: true },
+    failedLoginAttempts: { type: Number, default: 0 },
+    lockUntil: Date,
+    sessions: [sessionSchema],
+    loginHistory: [loginHistorySchema],
     aiUses: { type: Number, default: 0 },
     otp: String,
     otpExpires: Date,

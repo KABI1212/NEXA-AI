@@ -1,69 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color: #0b1f44;
-  background: #f6f9ff;
+* {
+  font-family: "Times New Roman", Times, serif !important;
+  box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
+:root {
+  --primary: #0f4fd8;
+  --primary-dark: #0a3aa0;
+  --primary-light: #e6f1fb;
+  --accent: #d4a017;
+  --accent-light: #faeeda;
+  --navy: #07152f;
+  --navy-light: #0d2045;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --bg-white: #ffffff;
+  --bg-light: #f8fafc;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --gold: #d4a017;
+  color: var(--text-primary);
+  background: var(--bg-light);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  font-family: Inter, Poppins, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+
+input,
+textarea,
+select,
+option {
+  color: var(--text-primary);
 }
 
 .blue-gradient {
-  background: linear-gradient(135deg, #12c8ff 0%, #1263ff 48%, #4731e8 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: color-mix(in srgb, var(--bg-white) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bg-white) 16%, transparent);
   backdrop-filter: blur(18px);
 }
 
 .dashboard-shell {
   background:
-    radial-gradient(circle at 20% 0%, rgba(18, 200, 255, 0.18), transparent 32%),
-    linear-gradient(135deg, #06142f 0%, #071a3d 52%, #081126 100%);
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 52%, var(--navy) 100%);
 }
 
 .certificate {
-  width: min(1120px, 100%);
-  aspect-ratio: 1.414 / 1;
+  width: 1122px;
+  height: 794px;
   position: relative;
   overflow: hidden;
-  background: #fff;
-  color: #091f44;
-  font-family: "Times New Roman", serif;
-  border: 2px solid #d6a233;
-  box-shadow: 0 20px 70px rgba(8, 24, 55, 0.18);
-}
-
-.certificate::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(130deg, #06286d 0 12%, transparent 12.2%),
-    linear-gradient(138deg, transparent 0 72%, #06286d 72.2% 100%);
-  pointer-events: none;
-}
-
-.certificate::after {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border: 1px solid #d6a233;
-  pointer-events: none;
+  background: var(--bg-white);
+  color: var(--navy);
+  border: 2px solid var(--gold);
+  box-shadow: 0 20px 70px color-mix(in srgb, var(--navy) 18%, transparent);
 }
 
 .gold-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d6a233, transparent);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }

@@ -12,6 +12,10 @@ function sanitizeUser(user) {
   delete nextUser.password;
   delete nextUser.otp;
   delete nextUser.passwordResetOtp;
+  delete nextUser.sessions;
+  delete nextUser.loginHistory;
+  delete nextUser.failedLoginAttempts;
+  delete nextUser.lockUntil;
   return nextUser;
 }
 
@@ -54,7 +58,7 @@ export const users = asyncHandler(async (_req, res) => {
     return res.json({ users: (await listUsers()).map(sanitizeUser) });
   }
 
-  res.json({ users: await User.find().select("-password").sort({ createdAt: -1 }) });
+  res.json({ users: (await User.find().select("-password -sessions -loginHistory").sort({ createdAt: -1 })).map(sanitizeUser) });
 });
 
 export const certificates = asyncHandler(async (_req, res) => {

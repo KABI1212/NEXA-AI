@@ -26,7 +26,7 @@ export default function ForgotPassword() {
   }
   return <AuthShell title="Reset password">
     <form onSubmit={submit} className="grid gap-4">
-      {message && <div className="rounded-md bg-blue-50 p-3 text-sm font-semibold text-royal">{message}</div>}
+      {message && <div className="rounded-md bg-primary-light p-3 text-sm font-semibold text-primary">{message}</div>}
       <FormField label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
       {step === 2 && <>
         <FormField label="OTP" value={form.otp} onChange={(e) => setForm({ ...form, otp: e.target.value })} />

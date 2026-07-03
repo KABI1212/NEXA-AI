@@ -11,6 +11,10 @@ function sanitizeUser(user) {
   delete nextUser.password;
   delete nextUser.otp;
   delete nextUser.passwordResetOtp;
+  delete nextUser.sessions;
+  delete nextUser.loginHistory;
+  delete nextUser.failedLoginAttempts;
+  delete nextUser.lockUntil;
   return nextUser;
 }
 
@@ -40,7 +44,8 @@ export const dashboard = asyncHandler(async (req, res) => {
       certificatesEarned: certificates.filter((item) => item.verified).length,
       missingSkills: ["System design", "Cloud deployment", "Interview storytelling"],
       jobsTrending: ["AI Engineer", "Full Stack Developer", "Cybersecurity Analyst", "Data Scientist"],
-      courseCount
+      courseCount,
+      progress
     });
   }
 
@@ -57,13 +62,20 @@ export const dashboard = asyncHandler(async (req, res) => {
     certificatesEarned: certificates.length,
     missingSkills: ["System design", "Cloud deployment", "Interview storytelling"],
     jobsTrending: ["AI Engineer", "Full Stack Developer", "Cybersecurity Analyst", "Data Scientist"],
-    courseCount
+    courseCount,
+    progress
   });
 });
 
 export const updateProfile = asyncHandler(async (req, res) => {
   const allowed = ["name", "phone", "role"];
+  const publicRoles = new Set(["student", "fresher", "professional", "career-switcher", "job-seeker"]);
   const update = Object.fromEntries(Object.entries(req.body).filter(([key]) => allowed.includes(key)));
+  if (update.role && !publicRoles.has(update.role)) {
+    res.status(400);
+    throw new Error("Invalid role");
+  }
+  if (req.user.role === "admin") delete update.role;
 
   if (isLocalMode()) {
     const user = await findUserById(req.user._id);

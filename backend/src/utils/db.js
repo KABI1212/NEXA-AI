@@ -4,6 +4,9 @@ import { hasUsableMongoUri, setDataMode } from "./dataMode.js";
 export default async function connectDB() {
   const uri = process.env.MONGO_URI?.trim();
   if (!hasUsableMongoUri(uri)) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("MONGO_URI is required in production");
+    }
     setDataMode("local");
     console.warn("MongoDB is not configured. Using local JSON storage in backend/data/local-db.json.");
     return false;
@@ -16,6 +19,9 @@ export default async function connectDB() {
     console.log("MongoDB connected");
     return true;
   } catch (error) {
+    if (process.env.NODE_ENV === "production") {
+      throw error;
+    }
     setDataMode("local");
     console.warn(`MongoDB connection failed. Using local JSON storage instead. ${error.message}`);
     return false;

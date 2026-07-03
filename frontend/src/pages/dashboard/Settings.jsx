@@ -13,11 +13,15 @@ export default function Settings() {
     setUser(data.user);
   }
   return <Card className="max-w-2xl bg-white/95">
-    <h2 className="font-display text-3xl font-black">Settings</h2>
+    <h2 className="text-3xl font-black">Settings</h2>
     <div className="mt-5 grid gap-4">
       <FormField label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
       <FormField label="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-      <FormField label="Role" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} />
+      {user?.role !== "admin" && (
+        <select aria-label="Profile type" className="min-h-11 rounded-md border border-slate-200 px-3" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
+          {["student", "fresher", "professional", "career-switcher", "job-seeker"].map((role) => <option key={role} value={role}>{role}</option>)}
+        </select>
+      )}
       <Button onClick={save}>Save Profile</Button>
     </div>
   </Card>;

@@ -1,6 +1,23 @@
 {
   "users": [
     {
+      "active": true,
+      "aiUses": 0,
+      "onboarding": {
+        "qualification": "B.E",
+        "department": "CSE",
+        "skills": [
+          "JAVA"
+        ],
+        "interests": [
+          "Full stack web development"
+        ],
+        "experience": "nil",
+        "dreamJob": "app developer",
+        "dreamCompany": "google",
+        "preferredCountry": "us",
+        "salaryGoal": "12"
+      },
       "_id": "8541bc4b-d654-45a7-9468-6970cc1b929d",
       "name": "Nexa Admin",
       "email": "admin@nexa.ai",
@@ -8,11 +25,8 @@
       "password": "$2a$12$sqzA5SBxQXonTrthFsZXTewMGpAO5vDoMTc1W4dZ11CotPgN6ODNO",
       "role": "admin",
       "verified": true,
-      "active": true,
-      "aiUses": 0,
-      "onboarding": null,
       "createdAt": "2026-04-28T16:53:12.981Z",
-      "updatedAt": "2026-04-28T16:53:12.981Z"
+      "updatedAt": "2026-04-29T09:51:26.610Z"
     },
     {
       "active": true,
@@ -30,7 +44,7 @@
       },
       "name": "kabi",
       "email": "kabileshk702@gmail.com",
-      "phone": "student",
+      "phone": "965574378",
       "password": "$2a$12$Hdvsxa/TJqPkiLQbdiZgcOy8P5uA3bv96/yqQxUJ12SmLmSr2UrNK",
       "role": "student",
       "verified": true,
@@ -38,7 +52,28 @@
       "otpExpires": "2026-04-28T17:03:15.901Z",
       "_id": "c18d89e7-4b62-414d-83be-0e5f97339516",
       "createdAt": "2026-04-28T16:53:15.905Z",
-      "updatedAt": "2026-04-28T16:53:25.913Z"
+      "updatedAt": "2026-07-03T17:29:00.434Z",
+      "sessions": [
+        {
+          "sessionId": "0fefa249-67f2-44e1-9c61-3db4a25d105e",
+          "refreshTokenHash": "46dad5b54b537850e968cc4c40f0c8d42742f6b708489f41edd0345632cd3052",
+          "createdAt": "2026-07-03T17:29:00.430Z",
+          "lastUsedAt": "2026-07-03T17:29:00.430Z",
+          "expiresAt": "2026-07-10T17:29:00.430Z",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "loginHistory": [
+        {
+          "success": true,
+          "reason": "login",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0",
+          "createdAt": "2026-07-03T17:29:00.431Z"
+        }
+      ]
     },
     {
       "active": true,
@@ -91,254 +126,775 @@
   ],
   "courses": [
     {
-      "_id": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
-      "title": "Full Stack Web Development",
-      "slug": "full-stack-web-development",
-      "category": "Web Development",
-      "instructor": "Prof. Rahul Sharma",
-      "level": "Beginner to Advanced",
       "price": 0,
       "premium": false,
+      "published": true,
+      "title": "Full Stack Web Development",
+      "slug": "full-stack-web-development",
+      "instructor": "Prof. Rahul Sharma",
+      "category": "Web Development",
+      "level": "Beginner to Advanced",
       "description": "Master React, Node.js, Express, MongoDB, deployment, interviews, and portfolio projects.",
       "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
       "modules": [
         {
-          "_id": "5c041c7d-2532-4850-a230-b12a4fa02ed1",
-          "title": "HTML, CSS and JavaScript Foundations",
+          "_id": "dfe61494-c776-4291-b889-00c33934d942",
+          "title": "HTML & CSS Fundamentals",
+          "videoUrl": "https://www.youtube.com/embed/qz0aGYrrlhU",
           "duration": "52m",
-          "assignment": "Build a responsive landing page",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Build a responsive landing page"
         },
         {
-          "_id": "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
-          "title": "React and Component Architecture",
+          "_id": "e1b2e82f-c828-4e73-9b97-77e5b019997f",
+          "title": "JavaScript Essentials",
+          "videoUrl": "https://www.youtube.com/embed/W6NZfCO5SIk",
+          "duration": "1h 10m",
+          "notesUrl": "",
+          "assignment": "Build a to-do app"
+        },
+        {
+          "_id": "262c42ec-fe0a-4355-af47-18e68538fd28",
+          "title": "React & Component Architecture",
+          "videoUrl": "https://www.youtube.com/embed/bMknfKXIFA8",
           "duration": "1h 20m",
-          "assignment": "Build a dashboard UI",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Build a dashboard UI"
         },
         {
-          "_id": "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
-          "title": "Node, Express and MongoDB APIs",
+          "_id": "8421aed3-0a30-4f7d-89b8-97ef6e197728",
+          "title": "Node.js & Express APIs",
+          "videoUrl": "https://www.youtube.com/embed/Oe421EPjeBE",
           "duration": "1h 35m",
-          "assignment": "Create REST API with auth",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Create REST API with auth"
         },
         {
-          "_id": "43085dcb-74ed-4783-83fe-18f4047430e4",
-          "title": "Deployment and Career Portfolio",
+          "_id": "785efcbc-ffbf-4d5f-b3ef-6cdcae168930",
+          "title": "MongoDB & Databases",
+          "videoUrl": "https://www.youtube.com/embed/c2M-rlkkT5o",
+          "duration": "55m",
+          "notesUrl": "",
+          "assignment": "Design a database schema"
+        },
+        {
+          "_id": "dcdcb8bf-40b8-4cc5-9af7-3286b1d52813",
+          "title": "Deployment & Portfolio",
+          "videoUrl": "https://www.youtube.com/embed/l134cBAJCuc",
           "duration": "48m",
-          "assignment": "Deploy full-stack app",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Deploy full-stack app"
         }
       ],
       "quiz": [
         {
-          "question": "Which library builds UI components?",
+          "question": "Which hook manages state in React?",
           "options": [
-            "React",
-            "MongoDB",
-            "JWT"
+            "useState",
+            "useEffect",
+            "useRef",
+            "useContext"
           ],
-          "answer": "React"
+          "answer": "useState"
+        },
+        {
+          "question": "What does REST stand for?",
+          "options": [
+            "Representational State Transfer",
+            "Remote Execution Standard",
+            "React Element Syntax Tree",
+            "None"
+          ],
+          "answer": "Representational State Transfer"
+        },
+        {
+          "question": "Which command initializes a Node project?",
+          "options": [
+            "npm init",
+            "node start",
+            "npm run",
+            "node init"
+          ],
+          "answer": "npm init"
         }
       ],
       "finalTest": [
         {
-          "question": "Which pattern protects APIs?",
+          "question": "Which method creates a new MongoDB document?",
           "options": [
-            "JWT auth",
-            "Inline CSS",
-            "Console logs"
+            "create()",
+            "insert()",
+            "add()",
+            "push()"
           ],
-          "answer": "JWT auth"
+          "answer": "create()"
+        },
+        {
+          "question": "What is JWT used for?",
+          "options": [
+            "Authentication",
+            "Styling",
+            "Routing",
+            "Database"
+          ],
+          "answer": "Authentication"
+        },
+        {
+          "question": "What does useEffect do?",
+          "options": [
+            "Runs side effects",
+            "Manages state",
+            "Renders JSX",
+            "Handles routing"
+          ],
+          "answer": "Runs side effects"
         }
       ],
-      "published": true,
-      "createdAt": "2026-04-28T16:53:12.982Z",
-      "updatedAt": "2026-04-28T16:53:12.982Z"
+      "_id": "bb1d69c3-89b4-4b7e-a0b9-04c68736082b",
+      "createdAt": "2026-04-29T10:23:39.301Z",
+      "updatedAt": "2026-04-29T10:23:39.301Z"
     },
     {
-      "_id": "8f6148c5-823a-4436-86c4-5b434fb80c94",
-      "title": "AI and Machine Learning Career Track",
-      "slug": "ai-machine-learning-career-track",
-      "category": "AI / Machine Learning",
-      "instructor": "Dr. Meera Iyer",
-      "level": "Beginner",
       "price": 0,
       "premium": false,
+      "published": true,
+      "title": "AI and Machine Learning Career Track",
+      "slug": "ai-machine-learning-career-track",
+      "instructor": "Dr. Meera Iyer",
+      "category": "AI / Machine Learning",
       "description": "Python, ML basics, model evaluation, prompt engineering, and AI product thinking.",
       "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
       "modules": [
         {
-          "_id": "ca46b8e1-0832-4f85-93c0-40fbc71c4ebc",
-          "title": "AI Foundations",
+          "_id": "721b8149-b35e-4392-b9ca-b2a53c5a1b99",
+          "title": "AI Foundations & History",
+          "videoUrl": "https://www.youtube.com/embed/ad79nYk2keg",
           "duration": "45m",
-          "assignment": "",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": ""
         },
         {
-          "_id": "b96e455a-5ce4-415e-aebc-9b0b1a46990c",
-          "title": "ML Projects",
+          "_id": "d5deaf89-19ca-467d-b239-2d70d899f923",
+          "title": "Python for ML",
+          "videoUrl": "https://www.youtube.com/embed/rfscVS0vtbw",
           "duration": "1h",
-          "assignment": "",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Write a data analysis script"
         },
         {
-          "_id": "9b10ddbc-1930-4259-afa2-f57882ee8d44",
+          "_id": "9d3a3113-f2f6-4043-b26a-191a170bbfe7",
+          "title": "Machine Learning Basics",
+          "videoUrl": "https://www.youtube.com/embed/ukzFI9rgwfU",
+          "duration": "1h 10m",
+          "notesUrl": "",
+          "assignment": "Train a simple classifier"
+        },
+        {
+          "_id": "dec37f0c-596b-4b60-82ef-cb7580b96dbb",
+          "title": "Neural Networks & Deep Learning",
+          "videoUrl": "https://www.youtube.com/embed/aircAruvnKk",
+          "duration": "1h 20m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "e98ac55e-20f0-4f79-83d5-acda13983cd4",
           "title": "Prompt Engineering",
+          "videoUrl": "https://www.youtube.com/embed/dOxUroR57xs",
           "duration": "40m",
-          "assignment": "",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Write 5 effective prompts"
         }
       ],
-      "quiz": [],
-      "finalTest": [],
-      "published": true,
-      "createdAt": "2026-04-28T16:53:12.982Z",
-      "updatedAt": "2026-04-28T16:53:12.982Z"
+      "quiz": [
+        {
+          "question": "What is supervised learning?",
+          "options": [
+            "Learning with labeled data",
+            "Learning without data",
+            "Reinforcement learning",
+            "None"
+          ],
+          "answer": "Learning with labeled data"
+        },
+        {
+          "question": "Which library is used for ML in Python?",
+          "options": [
+            "scikit-learn",
+            "React",
+            "Express",
+            "jQuery"
+          ],
+          "answer": "scikit-learn"
+        },
+        {
+          "question": "What is a neural network?",
+          "options": [
+            "A set of algorithms modeled on the human brain",
+            "A CSS framework",
+            "A database",
+            "A routing library"
+          ],
+          "answer": "A set of algorithms modeled on the human brain"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "What does GPT stand for?",
+          "options": [
+            "Generative Pre-trained Transformer",
+            "General Purpose Tool",
+            "Gradient Processing Tree",
+            "None"
+          ],
+          "answer": "Generative Pre-trained Transformer"
+        },
+        {
+          "question": "What is overfitting?",
+          "options": [
+            "Model too complex for training data",
+            "Model too simple",
+            "Data is too small",
+            "None"
+          ],
+          "answer": "Model too complex for training data"
+        },
+        {
+          "question": "What is a prompt in AI?",
+          "options": [
+            "Input text given to an AI model",
+            "A CSS property",
+            "A database query",
+            "A server route"
+          ],
+          "answer": "Input text given to an AI model"
+        }
+      ],
+      "_id": "f83e872b-900d-4347-9d9f-d2616b999100",
+      "createdAt": "2026-04-29T10:23:39.302Z",
+      "updatedAt": "2026-04-29T10:23:39.302Z"
     },
     {
-      "_id": "0ec7b27c-576e-416d-bc08-933c68ace194",
-      "title": "Placement Prep and Communication",
-      "slug": "placement-prep-communication",
-      "category": "Placement Prep",
-      "instructor": "Ananya Rao",
-      "level": "Beginner",
       "price": 0,
       "premium": false,
+      "published": true,
+      "title": "Placement Prep & Communication",
+      "slug": "placement-prep-communication",
+      "instructor": "Ananya Rao",
+      "category": "Placement Prep",
       "description": "Aptitude, resume writing, HR answers, and confidence-building practice.",
       "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978",
       "modules": [
         {
-          "_id": "be8be885-e6ad-4567-a39a-f842b9e27c9f",
-          "title": "Aptitude Basics",
+          "_id": "e160105b-d22c-4689-bec1-a7aad9e4a25b",
+          "title": "Aptitude & Reasoning Basics",
+          "videoUrl": "https://www.youtube.com/embed/MWTt4TLORKY",
           "duration": "35m",
-          "assignment": "",
-          "videoUrl": "",
-          "notesUrl": ""
+          "notesUrl": "",
+          "assignment": "Solve 20 aptitude questions"
         },
         {
-          "_id": "72bf8000-4db5-4612-b939-1483784841d4",
-          "title": "HR Interview Answers",
+          "_id": "60d5eede-5016-4729-87f6-21760b8d6038",
+          "title": "Resume Writing Masterclass",
+          "videoUrl": "https://www.youtube.com/embed/Tt08KmFfIYQ",
           "duration": "42m",
-          "assignment": "",
-          "videoUrl": "",
-          "notesUrl": ""
-        }
-      ],
-      "quiz": [],
-      "finalTest": [],
-      "published": true,
-      "createdAt": "2026-04-28T16:53:12.982Z",
-      "updatedAt": "2026-04-28T16:53:12.982Z"
-    },
-    {
-      "price": 0,
-      "premium": false,
-      "published": true,
-      "modules": [
+          "notesUrl": "",
+          "assignment": "Write your resume"
+        },
         {
-          "_id": "6e89bd62-14aa-4498-b408-30616dd487f4",
-          "title": "Intro",
-          "videoUrl": "",
+          "_id": "e39ce07b-5905-4b4d-8af5-b7a51f11ee01",
+          "title": "HR Interview Techniques",
+          "videoUrl": "https://www.youtube.com/embed/KJ51IQiJjuA",
+          "duration": "50m",
+          "notesUrl": "",
+          "assignment": "Record a mock answer"
+        },
+        {
+          "_id": "6546bf8e-4bd8-42d0-94b2-b0e709618203",
+          "title": "Group Discussion Skills",
+          "videoUrl": "https://www.youtube.com/embed/jWTCCe9RHLU",
+          "duration": "38m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "1fc12b35-2c1d-44e8-aed5-27e49da0fad2",
+          "title": "Salary Negotiation",
+          "videoUrl": "https://www.youtube.com/embed/XY5SeCl_8NE",
           "duration": "30m",
           "notesUrl": "",
           "assignment": ""
         }
       ],
-      "quiz": [],
-      "finalTest": [],
-      "slug": "testing-course",
-      "description": "Created from API test",
-      "instructor": "QA Mentor",
-      "category": "Web Development",
-      "title": "Testing Course",
-      "_id": "f8eeaf2a-356d-43bc-ad17-aa26cf70a2b5",
-      "createdAt": "2026-04-28T16:58:12.000Z",
-      "updatedAt": "2026-04-28T16:58:12.000Z"
+      "quiz": [
+        {
+          "question": "What is the STAR method used for?",
+          "options": [
+            "Structuring interview answers",
+            "Writing code",
+            "Database design",
+            "None"
+          ],
+          "answer": "Structuring interview answers"
+        },
+        {
+          "question": "What should a resume NOT include?",
+          "options": [
+            "Photo and religion",
+            "Skills",
+            "Experience",
+            "Education"
+          ],
+          "answer": "Photo and religion"
+        },
+        {
+          "question": "What does ATS stand for?",
+          "options": [
+            "Applicant Tracking System",
+            "Automated Test Suite",
+            "Application Transfer Service",
+            "None"
+          ],
+          "answer": "Applicant Tracking System"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "What is a good answer length for HR questions?",
+          "options": [
+            "1-2 minutes",
+            "10 minutes",
+            "30 seconds",
+            "5 minutes"
+          ],
+          "answer": "1-2 minutes"
+        },
+        {
+          "question": "Which is most important in a group discussion?",
+          "options": [
+            "Listening and contributing",
+            "Talking the most",
+            "Being silent",
+            "None"
+          ],
+          "answer": "Listening and contributing"
+        },
+        {
+          "question": "When should you negotiate salary?",
+          "options": [
+            "After receiving an offer",
+            "During the first interview",
+            "Before applying",
+            "Never"
+          ],
+          "answer": "After receiving an offer"
+        }
+      ],
+      "_id": "ffe043f6-d890-4dbe-a1e1-67aed30346e3",
+      "createdAt": "2026-04-29T10:23:39.302Z",
+      "updatedAt": "2026-04-29T10:23:39.302Z"
+    },
+    {
+      "price": 0,
+      "premium": false,
+      "published": true,
+      "title": "Cloud Computing & DevOps",
+      "slug": "cloud-computing-devops",
+      "instructor": "Mr. Arjun Nair",
+      "category": "Cloud / DevOps",
+      "description": "Learn cloud fundamentals, AWS services, containers, CI/CD, and Kubernetes foundations.",
+      "thumbnail": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
+      "modules": [
+        {
+          "_id": "08ac6d0a-5d1f-4bef-9c35-6dcb141d61db",
+          "title": "Cloud Fundamentals",
+          "videoUrl": "https://www.youtube.com/embed/M988_fsOSWo",
+          "duration": "45m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "630d1748-8fd4-4226-a1d9-3e07e6a39b51",
+          "title": "AWS Core Services",
+          "videoUrl": "https://www.youtube.com/embed/ubCNZFXmMys",
+          "duration": "1h 5m",
+          "notesUrl": "",
+          "assignment": "Set up an S3 bucket"
+        },
+        {
+          "_id": "3e92b46a-e021-49a1-9067-3ec391437b23",
+          "title": "Docker & Containers",
+          "videoUrl": "https://www.youtube.com/embed/fqMOX6JJhGo",
+          "duration": "1h",
+          "notesUrl": "",
+          "assignment": "Dockerize a Node app"
+        },
+        {
+          "_id": "4bae9157-d6bc-4cd5-a693-275be06cb654",
+          "title": "CI/CD Pipelines",
+          "videoUrl": "https://www.youtube.com/embed/R8_veQiYBjI",
+          "duration": "55m",
+          "notesUrl": "",
+          "assignment": "Create a GitHub Actions workflow"
+        },
+        {
+          "_id": "ea1a3774-7ada-409a-ac74-6deac6c7c896",
+          "title": "Kubernetes Basics",
+          "videoUrl": "https://www.youtube.com/embed/X48VuDVv0do",
+          "duration": "1h 10m",
+          "notesUrl": "",
+          "assignment": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "What does IaaS stand for?",
+          "options": [
+            "Infrastructure as a Service",
+            "Internet and Software",
+            "Integrated API Service",
+            "None"
+          ],
+          "answer": "Infrastructure as a Service"
+        },
+        {
+          "question": "What is Docker used for?",
+          "options": [
+            "Containerization",
+            "Styling",
+            "Database management",
+            "Authentication"
+          ],
+          "answer": "Containerization"
+        },
+        {
+          "question": "What is CI/CD?",
+          "options": [
+            "Continuous Integration / Continuous Deployment",
+            "Code Interface Design",
+            "Cloud Instance Docker",
+            "None"
+          ],
+          "answer": "Continuous Integration / Continuous Deployment"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "What is Kubernetes?",
+          "options": [
+            "Container orchestration system",
+            "A cloud provider",
+            "A CSS framework",
+            "A database"
+          ],
+          "answer": "Container orchestration system"
+        },
+        {
+          "question": "Which AWS service hosts static websites?",
+          "options": [
+            "S3",
+            "EC2",
+            "RDS",
+            "Lambda"
+          ],
+          "answer": "S3"
+        },
+        {
+          "question": "What is a Dockerfile?",
+          "options": [
+            "Script to build a Docker image",
+            "A cloud config file",
+            "A database schema",
+            "None"
+          ],
+          "answer": "Script to build a Docker image"
+        }
+      ],
+      "_id": "fd23aa63-b3df-4756-b3f7-f9986936078b",
+      "createdAt": "2026-04-29T10:23:39.302Z",
+      "updatedAt": "2026-04-29T10:23:39.302Z"
+    },
+    {
+      "price": 0,
+      "premium": false,
+      "published": true,
+      "title": "Cybersecurity Fundamentals",
+      "slug": "cybersecurity-fundamentals",
+      "instructor": "Ms. Priya Venkat",
+      "category": "Cybersecurity",
+      "description": "Build core security knowledge across networks, ethical hacking, cryptography, and safer habits.",
+      "thumbnail": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+      "modules": [
+        {
+          "_id": "154a394a-1acb-4b40-a8a6-b9a083a1d033",
+          "title": "Introduction to Cybersecurity",
+          "videoUrl": "https://www.youtube.com/embed/inWWhr5tnEA",
+          "duration": "40m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "0eba37b9-8a5c-4910-8773-b258a700b733",
+          "title": "Network Security Basics",
+          "videoUrl": "https://www.youtube.com/embed/E03gh1huvW4",
+          "duration": "55m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "b1524171-462e-46e2-b04a-7698cc62439f",
+          "title": "Ethical Hacking Overview",
+          "videoUrl": "https://www.youtube.com/embed/3Kq1MIfTWCE",
+          "duration": "1h",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "311ca770-2d26-4c43-a4ff-9d2a5e70018f",
+          "title": "Cryptography & Encryption",
+          "videoUrl": "https://www.youtube.com/embed/AQDCe585Lnc",
+          "duration": "50m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "43b13a31-6f31-4544-bb04-cc7058d601a3",
+          "title": "Security Best Practices",
+          "videoUrl": "https://www.youtube.com/embed/aEmXqL-bTyE",
+          "duration": "35m",
+          "notesUrl": "",
+          "assignment": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "What is phishing?",
+          "options": [
+            "A social engineering attack via fake emails",
+            "A type of encryption",
+            "A firewall",
+            "None"
+          ],
+          "answer": "A social engineering attack via fake emails"
+        },
+        {
+          "question": "What does SSL stand for?",
+          "options": [
+            "Secure Sockets Layer",
+            "Server Side Logic",
+            "Simple Script Language",
+            "None"
+          ],
+          "answer": "Secure Sockets Layer"
+        },
+        {
+          "question": "What is a firewall?",
+          "options": [
+            "Network security system that monitors traffic",
+            "A type of malware",
+            "An encryption algorithm",
+            "None"
+          ],
+          "answer": "Network security system that monitors traffic"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "What is two-factor authentication?",
+          "options": [
+            "Using two verification methods",
+            "Two passwords",
+            "Two firewalls",
+            "None"
+          ],
+          "answer": "Using two verification methods"
+        },
+        {
+          "question": "What is a VPN?",
+          "options": [
+            "Virtual Private Network",
+            "Very Private Node",
+            "Verified Protocol Network",
+            "None"
+          ],
+          "answer": "Virtual Private Network"
+        },
+        {
+          "question": "What is SQL injection?",
+          "options": [
+            "Inserting malicious SQL into a query",
+            "A database backup method",
+            "A type of CSS",
+            "None"
+          ],
+          "answer": "Inserting malicious SQL into a query"
+        }
+      ],
+      "_id": "20cae00e-7c64-4e8f-b752-0b992797a1ea",
+      "createdAt": "2026-04-29T10:23:39.302Z",
+      "updatedAt": "2026-04-29T10:23:39.302Z"
+    },
+    {
+      "price": 0,
+      "premium": false,
+      "published": true,
+      "title": "Data Science & Analytics",
+      "slug": "data-science-analytics",
+      "instructor": "Dr. Suresh Kumar",
+      "category": "Data Science",
+      "description": "Practice Python, Pandas, visualization, statistics, and applied machine learning for analytics roles.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "modules": [
+        {
+          "_id": "a2fe1f40-ed9c-49e0-bf2e-aeba4b2e231e",
+          "title": "Data Science Overview",
+          "videoUrl": "https://www.youtube.com/embed/X3paOmcrTjQ",
+          "duration": "40m",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "9c0a212b-f3eb-48ea-a830-f2bc1d9bbfe5",
+          "title": "Python & Pandas",
+          "videoUrl": "https://www.youtube.com/embed/vmEHCJofslg",
+          "duration": "1h 10m",
+          "notesUrl": "",
+          "assignment": "Analyze a dataset"
+        },
+        {
+          "_id": "a72f74bc-1ae0-48e1-b88c-3a486ed6b103",
+          "title": "Data Visualization",
+          "videoUrl": "https://www.youtube.com/embed/a9UrKTVEeZA",
+          "duration": "55m",
+          "notesUrl": "",
+          "assignment": "Create 3 charts"
+        },
+        {
+          "_id": "86c5e773-2b2a-4892-95d1-a2f9605eb672",
+          "title": "Statistics for Data Science",
+          "videoUrl": "https://www.youtube.com/embed/xxpc-HPKN28",
+          "duration": "1h",
+          "notesUrl": "",
+          "assignment": ""
+        },
+        {
+          "_id": "c14a4538-cc46-407f-947a-2b7dbf9a05af",
+          "title": "Machine Learning for Data Scientists",
+          "videoUrl": "https://www.youtube.com/embed/7eh4d6sabA0",
+          "duration": "1h 15m",
+          "notesUrl": "",
+          "assignment": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "What is a DataFrame in Pandas?",
+          "options": [
+            "A 2D data structure",
+            "A chart type",
+            "A database table",
+            "A Python class"
+          ],
+          "answer": "A 2D data structure"
+        },
+        {
+          "question": "What does EDA stand for?",
+          "options": [
+            "Exploratory Data Analysis",
+            "Encrypted Data Access",
+            "Event Driven Architecture",
+            "None"
+          ],
+          "answer": "Exploratory Data Analysis"
+        },
+        {
+          "question": "Which chart shows data distribution?",
+          "options": [
+            "Histogram",
+            "Line chart",
+            "Pie chart",
+            "Scatter plot"
+          ],
+          "answer": "Histogram"
+        }
+      ],
+      "finalTest": [
+        {
+          "question": "What is correlation?",
+          "options": [
+            "Statistical relationship between variables",
+            "A type of chart",
+            "A Python function",
+            "None"
+          ],
+          "answer": "Statistical relationship between variables"
+        },
+        {
+          "question": "What is the mean?",
+          "options": [
+            "Average of all values",
+            "Middle value",
+            "Most frequent value",
+            "None"
+          ],
+          "answer": "Average of all values"
+        },
+        {
+          "question": "What library is used for visualization in Python?",
+          "options": [
+            "Matplotlib",
+            "Express",
+            "React",
+            "MongoDB"
+          ],
+          "answer": "Matplotlib"
+        }
+      ],
+      "_id": "cfb2c675-b8b8-4671-8a3f-182768e667c3",
+      "createdAt": "2026-04-29T10:23:39.302Z",
+      "updatedAt": "2026-04-29T10:23:39.302Z"
     }
   ],
   "progress": [
     {
       "watchedModules": [
-        "5c041c7d-2532-4850-a230-b12a4fa02ed1",
-        "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
-        "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
-        "43085dcb-74ed-4783-83fe-18f4047430e4"
+        "721b8149-b35e-4392-b9ca-b2a53c5a1b99",
+        "d5deaf89-19ca-467d-b239-2d70d899f923",
+        "9d3a3113-f2f6-4043-b26a-191a170bbfe7",
+        "dec37f0c-596b-4b60-82ef-cb7580b96dbb",
+        "e98ac55e-20f0-4f79-83d5-acda13983cd4"
       ],
       "assignmentsDone": true,
       "quizPassed": true,
       "finalPassed": true,
-      "quizScore": 92,
-      "finalScore": 94,
+      "quizScore": 67,
+      "finalScore": 100,
       "percentage": 100,
       "completed": true,
       "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
-      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
-      "_id": "90f50238-18c8-42d5-82a9-15a57400bc78",
-      "createdAt": "2026-04-28T16:55:47.391Z",
-      "updatedAt": "2026-04-28T16:55:49.754Z"
-    },
-    {
-      "watchedModules": [
-        "5c041c7d-2532-4850-a230-b12a4fa02ed1",
-        "3a9d95e0-6d8d-4277-b856-cbd5a5dc40e5",
-        "0b282a9c-ca9d-4c2d-8165-dbea6c3711dd",
-        "43085dcb-74ed-4783-83fe-18f4047430e4"
-      ],
-      "assignmentsDone": true,
-      "quizPassed": true,
-      "finalPassed": true,
-      "quizScore": 92,
-      "finalScore": 94,
-      "percentage": 100,
-      "completed": true,
-      "userId": "092cab30-20e9-490f-bcd8-cda492af8146",
-      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
-      "_id": "23acecfb-79a6-444e-b469-5f4fc2a9da7a",
-      "createdAt": "2026-04-28T16:57:28.135Z",
-      "updatedAt": "2026-04-28T16:57:28.139Z"
+      "courseId": "f83e872b-900d-4347-9d9f-d2616b999100",
+      "_id": "69a6f5d9-5dfb-4bf6-9500-e03c82ae985d",
+      "createdAt": "2026-04-29T10:37:11.242Z",
+      "updatedAt": "2026-04-29T10:38:47.364Z"
     }
   ],
   "certificates": [
     {
       "verified": true,
       "ceoName": "Kabilesh",
-      "issueDate": "2026-04-28T16:55:47.471Z",
+      "issueDate": "2026-04-29T10:38:47.459Z",
+      "completionDate": "2026-04-29T10:38:47.459Z",
       "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
-      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
-      "certificateId": "NXA-2026-76561",
+      "courseId": "f83e872b-900d-4347-9d9f-d2616b999100",
+      "certificateId": "NXA-2026-88617",
       "studentName": "kabi",
-      "courseName": "Full Stack Web Development",
-      "instructorName": "Prof. Rahul Sharma",
-      "score": 93,
-      "qrUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4AewaftIAAATnSURBVO3BQY4jRxAEwfAC//9l1xzzVECjk7PSKszwR6qWnFQtOqladFK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYs+eQnIb1JzA+RGzRNAJjUTkEnNDZAbNROQ36TmjZOqRSdVi06qFn2yTM0mIE+omYBMQCY1E5BJzQTkBsikZlIzAXlCzSYgm06qFp1ULTqpWvTJlwF5Qs0TQCY1k5obIE+oeQLINwF5Qs03nVQtOqladFK16JO/DJA31NwAeULNBGRS8zc5qVp0UrXopGrRJ38ZNTdANqm5AfJ/clK16KRq0UnVok++TM1vAnKjZgIyAZnU3ACZ1ExqboBMap5Q829yUrXopGrRSdWiT5YB+ZPUTECeUDMBmdRMQG6ATGreAPJvdlK16KRq0UnVIvyR/zAgN2omIJOaJ4BMap4AMqn5m5xULTqpWnRSteiTl4BMaiYgm9RMaiYgE5BJzQTkRs0TQCY1k5oJyKRmArJJzTedVC06qVp0UrXokz9MzQRkUvOEmgnIBGRSMwGZgDyh5gbIpGYC8oaaJ4BMat44qVp0UrXopGrRJ79MzRNAbtRMQCY1E5AJyKTmBsgNkBs1E5An1ExA3lCz6aRq0UnVopOqRfgjLwB5Q80EZFLzBpAbNROQN9RMQN5QMwGZ1DwBZFKz6aRq0UnVopOqRfgjXwRkUnMD5EbNBGRSMwGZ1DwBZFIzAblRcwNkUvMGkBs133RSteikatFJ1SL8kReA3KiZgExq3gByo2YCMql5AsgmNROQN9RMQCY1E5BJzRsnVYtOqhadVC36ZJmaCcgTQG7U3Ki5UfOGmieATGomIJOaCcg3qdl0UrXopGrRSdWiT75MzQTkRs03AZnU3AB5Qs2k5kbNE2omIDdqJiCTmk0nVYtOqhadVC3CH/mDgExqJiA3aiYgk5oJyI2aJ4DcqLkBMqnZBGRS800nVYtOqhadVC365CUgm4BMap5Qc6PmBsik5gk1E5AbNTdAvgnIpOaNk6pFJ1WLTqoWfbJMzQRkUjMBmdRMQCY1N0CeUHMDZFIzqZmATGpugNyomYBMaiYgT6jZdFK16KRq0UnVok/+MDU3av4kNU+omYBMam7UTEAmNROQSc0NkEnNppOqRSdVi06qFn3yZWomIJOaCcgTaiY1N0Bu1ExAJjUTkBs1TwC5AfIEkBsgk5o3TqoWnVQtOqlahD/yHwbkRs0NkEnNG0AmNROQGzVPANmk5o2TqkUnVYtOqhZ98hKQ36RmUvMEkEnNJjUTkDeATGreUPNNJ1WLTqoWnVQt+mSZmk1AboBMajYBmdRMQCY1k5obIDdq3lAzAZnUbDqpWnRSteikatEnXwbkCTVvAJnUTGqeUDMBmdRMQG7U3AB5Q80EZFIzAZnUvHFSteikatFJ1aJP6grIpOZGzQTkCTVvAHlCzaaTqkUnVYtOqhZ98j8DZFLzBpBJzSYgT6i5ATKp2XRSteikatFJ1aJPvkzNN6mZgExAJjVPqNkE5Ak1E5BJzQRkUvObTqoWnVQtOqla9MkyIL8JyI2aJ4BMap4AMql5Asik5gk1E5BJzTedVC06qVp0UrUIf6RqyUnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC06qVp0UrXoH6kZZAtm/L00AAAAAElFTkSuQmCC",
-      "_id": "ce55ad7d-10cc-4f7b-83d3-5e7f4422cbfd",
-      "createdAt": "2026-04-28T16:55:47.471Z",
-      "updatedAt": "2026-04-28T16:55:47.471Z"
-    },
-    {
-      "verified": true,
-      "ceoName": "Kabilesh",
-      "issueDate": "2026-04-28T16:57:28.176Z",
-      "userId": "092cab30-20e9-490f-bcd8-cda492af8146",
-      "courseId": "01fdbadd-8154-4b50-8e0b-3cf088d350fc",
-      "certificateId": "NXA-2026-77412",
-      "studentName": "Flow User",
-      "courseName": "Full Stack Web Development",
-      "instructorName": "Prof. Rahul Sharma",
-      "score": 93,
-      "qrUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4AewaftIAAATVSURBVO3BQW4ERxIEwfDC/P/LvjzmXgpodA4hUWGGP1K15KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC06qVr0yUtAfpOaJ4BMaiYgk5oJyKRmAjKpuQFyo2YC8pvUvHFSteikatFJ1aJPlqnZBOQNNROQSc0EZFIzAbkBMqmZ1ExAnlCzCcimk6pFJ1WLTqoWffJlQJ5Q8wSQSc03qXkCyDcBeULNN51ULTqpWnRSteiT+j9qboA8oWYCMqn5S06qFp1ULTqpWvTJHwPkRs0EZFLzhJobIP8lJ1WLTqoWnVQt+uTL1PwmNROQN4DcAJnUTGpugExqnlDzT3JSteikatFJ1aJPlgH5y9RMQG6ATGreAPJPdlK16KRq0UnVIvyRfzEgN2o2AZnUPAFkUvOXnFQtOqladFK16JOXgExqJiCb1ExqJiATkBs1E5BJzRNAJjWTmgnIpGYCsknNN51ULTqpWnRSteiTZUAmNTdAJjVPAJnUTEB+k5obIJOaCcgbap4AMql546Rq0UnVopOqRZ+8pGYC8gaQGzWTmgnIG2omIE8AuVEzAXlCzQTkDTWbTqoWnVQtOqla9MkyNTdAJjUTkEnNBOQJNROQTUAmNROQCcgTaiYgk5ongExqNp1ULTqpWnRStQh/5B8EyI2aTUAmNROQSc0E5EbNDZBJzRtAbtR800nVopOqRSdVi/BHvgjIjZrfBGRS8wSQTWomIG+omYBMaiYgk5o3TqoWnVQtOqla9MlLQJ5QMwF5Qs0EZFIzAXkCyKRmUvMEkEnNBGRSMwH5JjWbTqoWnVQtOqlahD/yApBJzQTkRs1vAnKj5gbIjZpNQCY1E5BJzQ2QSc2mk6pFJ1WLTqoW4Y8sAnKjZgLyhJobIDdqJiCTmieA3Ki5ATKp2QRkUvNNJ1WLTqoWnVQt+uQlIN+k5gk1E5AngExqnlAzAblRcwPkm4BMat44qVp0UrXopGoR/sgLQCY1N0C+Sc0EZJOaGyCTmhsgN2omIJOaCciNmm86qVp0UrXopGrRJ18G5EbNBGRS8wSQJ9RMQCY1T6iZgExqbtRMQCY1E5BJzQ2QSc2mk6pFJ1WLTqoWffLL1NyomYDcqJnUTEAmNROQSc0EZFIzAblR8wSQGyBPALkBMql546Rq0UnVopOqRfgj/2JAJjU3QCY1m4BMaiYgN2qeALJJzRsnVYtOqhadVC365CUgv0nNpGYCMqmZ1HyTmgnIG0AmNW+o+aaTqkUnVYtOqhZ9skzNJiA3QN4AMqmZgExqJiCTmknNDZAbNW+omYBMajadVC06qVp0UrXoky8D8oSabwLyhJoJyKRmAnKj5gbIG2omIJOaCcik5o2TqkUnVYtOqhZ98scBmdTcALlRc6NmAvKEmjeAPKFm00nVopOqRSdViz75Y9TcAHlCzQ2QSc0mIE+ouQEyqdl0UrXopGrRSdWiT75MzTepmYDcqJmATGq+CcgTaiYgk5oJyKTmN51ULTqpWnRSteiTZUB+E5AngExqboBMam6ATGqeADKpeULNBGRS800nVYtOqhadVC3CH6laclK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYtOqhadVC36H+VMRygO+Ni3AAAAAElFTkSuQmCC",
-      "_id": "8b229645-c7c2-46bf-9cc5-e6d5ba7d1200",
-      "createdAt": "2026-04-28T16:57:28.176Z",
-      "updatedAt": "2026-04-28T16:57:28.176Z"
+      "courseName": "AI and Machine Learning Career Track",
+      "instructorName": "Dr. Meera Iyer",
+      "score": 84,
+      "qrUrl": "data:image/png;base64,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",
+      "_id": "51512c58-149d-4628-8924-0d2cc02ba3a3",
+      "createdAt": "2026-04-29T10:38:47.463Z",
+      "updatedAt": "2026-04-29T10:38:47.463Z"
     }
   ],
   "reports": [
@@ -431,6 +987,60 @@
       },
       "createdAt": "2026-04-28T16:58:21.569Z",
       "updatedAt": "2026-04-28T16:58:21.569Z"
+    },
+    {
+      "_id": "42d3ca39-3642-4c1c-bf4d-60aaa4f0f84c",
+      "userId": "8541bc4b-d654-45a7-9468-6970cc1b929d",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-04-29T09:51:34.610Z",
+      "updatedAt": "2026-04-29T09:51:34.610Z"
+    },
+    {
+      "_id": "0bee2956-fd48-4010-a563-52344176da02",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "type": "resume",
+      "title": "Resume Analyzer",
+      "data": {
+        "atsScore": 78,
+        "improvements": [
+          "Add measurable achievements",
+          "Include role-specific keywords",
+          "Move projects above certifications"
+        ],
+        "missingKeywords": [
+          "REST API",
+          "MongoDB",
+          "CI/CD",
+          "Cloud"
+        ],
+        "betterSummary": "Full-stack developer with strong React, Node.js, and deployment skills.",
+        "roleMatch": "82%"
+      },
+      "createdAt": "2026-07-03T17:29:38.928Z",
+      "updatedAt": "2026-07-03T17:29:38.928Z"
     }
   ],
   "tickets": []

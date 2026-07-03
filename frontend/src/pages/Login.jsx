@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const { data } = await api.post("/auth/login", form);
       saveSession(data);
-      navigate(data.user.onboarding ? "/dashboard" : "/onboarding");
+      navigate("/dashboard");
     } catch (err) {
       setError(apiError(err));
     }
@@ -29,7 +29,7 @@ export default function Login() {
       <FormField label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
       <FormField label="Password" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
       <Button>Login</Button>
-      <div className="flex justify-between text-sm"><Link className="font-bold text-royal" to="/forgot-password">Forgot Password</Link><Link to="/signup">Create account</Link></div>
+      <div className="flex justify-between text-sm"><Link className="font-bold text-primary" to="/forgot-password">Forgot Password</Link><Link to="/signup">Create account</Link></div>
     </form>
   </AuthShell>;
 }

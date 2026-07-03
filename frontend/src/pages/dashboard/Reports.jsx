@@ -14,9 +14,9 @@ export default function Reports() {
     a.click();
   }
   return <div>
-    <div className="flex items-center justify-between"><h2 className="font-display text-3xl font-black">Reports</h2><Button onClick={exportJson}>Export</Button></div>
+    <div className="flex items-center justify-between"><h2 className="text-3xl font-black">Reports</h2><Button onClick={exportJson}>Export</Button></div>
     <div className="mt-5 grid gap-3">
-      {reports.map((report) => <Card key={report._id} className="bg-white/95"><div className="flex justify-between"><b>{report.title}</b><span className="rounded-md bg-blue-50 px-2 py-1 text-xs font-black uppercase text-royal">{report.type}</span></div><pre className="mt-3 whitespace-pre-wrap text-xs">{JSON.stringify(report.data, null, 2)}</pre></Card>)}
+      {reports.map((report) => <Card key={report._id} className="bg-white/95"><div className="flex justify-between"><b>{report.title}</b><span className="rounded-md bg-primary-light px-2 py-1 text-xs font-black uppercase text-primary">{report.type}</span></div><pre className="mt-3 whitespace-pre-wrap text-xs">{JSON.stringify(report.data, null, 2)}</pre></Card>)}
       {!reports.length && <Card className="bg-white/95">AI reports will appear here after you use the tools.</Card>}
     </div>
   </div>;

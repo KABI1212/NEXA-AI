@@ -31,22 +31,22 @@ export default function Signup() {
       <FormField label="Full Name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
       <FormField label="Email" type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
       <FormField label="Phone" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-      <select className="min-h-11 rounded-md border border-slate-200 px-3" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
+      <select aria-label="Profile type" className="min-h-11 rounded-md border border-slate-200 px-3" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
         {["student", "fresher", "professional", "career-switcher", "job-seeker"].map((r) => <option key={r} value={r}>{r}</option>)}
       </select>
       <FormField label="Password" type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
       <FormField label="Confirm Password" type="password" required value={form.confirmPassword} onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} />
       <Button disabled={loading}>{loading ? "Sending OTP..." : "Register"}</Button>
-      <p className="text-sm">Already have an account? <Link className="font-bold text-royal" to="/login">Login</Link></p>
+      <p className="text-sm">Already have an account? <Link className="font-bold text-primary" to="/login">Login</Link></p>
     </form>
   </AuthShell>;
 }
 
 export function AuthShell({ title, children }) {
   return <div className="grid min-h-screen place-items-center bg-navy px-4 py-10">
-    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-glow">
-      <Logo className="mx-auto mb-5 h-16 w-auto" />
-      <h1 className="mb-5 text-center font-display text-2xl font-black text-ink">{title}</h1>
+    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+      <Logo className="mx-auto mb-5 h-10 w-auto" />
+      <h1 className="mb-5 text-center text-2xl font-black text-navy">{title}</h1>
       {children}
     </div>
   </div>;

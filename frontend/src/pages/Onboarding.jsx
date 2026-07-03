@@ -19,8 +19,8 @@ export default function Onboarding() {
   }
   return <div className="min-h-screen bg-navy px-4 py-10">
     <form onSubmit={submit} className="mx-auto max-w-4xl rounded-lg bg-white p-6">
-      <Logo className="mb-6 h-14 w-auto" />
-      <h1 className="font-display text-3xl font-black">Personalize your career dashboard</h1>
+      <Logo className="mb-6 h-10 w-auto" />
+      <h1 className="text-3xl font-black">Personalize your career dashboard</h1>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {Object.keys(form).map((key) => <FormField key={key} label={key.replace(/([A-Z])/g, " $1")} value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} />)}
       </div>

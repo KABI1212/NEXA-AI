@@ -1,6 +1,15 @@
 import nodemailer from "nodemailer";
 import { isLocalMode } from "./dataMode.js";
 
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function sendEmail({ to, subject, html }) {
   if (isLocalMode() || !process.env.SMTP_HOST || !process.env.SMTP_USER) {
     console.log(`[MAIL MOCK] ${subject} -> ${to}`);
@@ -28,15 +37,17 @@ export async function sendEmail({ to, subject, html }) {
 }
 
 export function otpEmailTemplate(name, otp) {
+  const safeName = escapeHtml(name);
+  const safeOtp = escapeHtml(otp);
   return `
     <div style="font-family:Inter,Arial,sans-serif;background:#07152f;padding:32px;color:#fff">
       <div style="max-width:560px;margin:auto;background:#fff;color:#111827;border-radius:16px;padding:28px">
         <h1 style="color:#0f4fd8">Nexa AI</h1>
-        <p>Hi ${name},</p>
+        <p>Hi ${safeName},</p>
         <p>Your verification code is:</p>
-        <div style="font-size:34px;font-weight:800;letter-spacing:8px;color:#0f4fd8">${otp}</div>
+        <div style="font-size:34px;font-weight:800;letter-spacing:8px;color:#0f4fd8">${safeOtp}</div>
         <p>This code expires in 10 minutes.</p>
-        <p style="color:#6b7280">Next Step fo the Future</p>
+        <p style="color:#6b7280">Next Step for the Future</p>
       </div>
     </div>`;
 }

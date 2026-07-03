@@ -2,22 +2,18 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Inter", "Poppins", "sans-serif"],
-        display: ["Poppins", "Inter", "sans-serif"],
-        certificate: ["Times New Roman", "serif"]
-      },
       colors: {
-        navy: "#06142f",
-        ink: "#0b1f44",
-        royal: "#1263ff",
-        cyan: "#12c8ff",
-        gold: "#d6a233"
+        primary: { DEFAULT: "#0f4fd8", dark: "#0a3aa0", light: "#e6f1fb" },
+        accent: { DEFAULT: "#d4a017", light: "#faeeda" },
+        navy: { DEFAULT: "#07152f", light: "#0d2045" },
+        gold: "#d4a017",
       },
-      boxShadow: {
-        glow: "0 20px 60px rgba(18, 99, 255, 0.28)"
-      }
-    }
+      fontFamily: {
+        serif: ['"Times New Roman"', "Times", "serif"],
+        sans: ['"Times New Roman"', "Times", "serif"],
+        mono: ['"Times New Roman"', "Times", "serif"],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

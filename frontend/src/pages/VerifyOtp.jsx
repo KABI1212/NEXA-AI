@@ -44,7 +44,7 @@ export default function VerifyOtp() {
   return <AuthShell title="Verify email OTP">
     <div className="grid gap-4">
       {error && <div className="rounded-md bg-red-50 p-3 text-sm font-semibold text-red-700">{error}</div>}
-      {devOtp && <div className="rounded-md bg-blue-50 p-3 text-sm font-semibold text-royal">Local mode OTP: {devOtp}</div>}
+      {devOtp && <div className="rounded-md bg-primary-light p-3 text-sm font-semibold text-primary">Local mode OTP: {devOtp}</div>}
       <div className="grid grid-cols-6 gap-2">
         {otp.map((digit, i) => <input key={i} maxLength="1" className="h-12 rounded-md border text-center text-xl font-black" value={digit} onChange={(e) => {
           const next = [...otp]; next[i] = e.target.value.replace(/\D/g, ""); setOtp(next);

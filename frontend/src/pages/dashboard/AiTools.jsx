@@ -30,7 +30,7 @@ export default function AiTools({ tool }) {
   }
   return <div className="grid gap-5">
     <Card className="bg-white/95">
-      <h2 className="font-display text-3xl font-black">{title}</h2>
+      <h2 className="text-3xl font-black">{title}</h2>
       <FormField label={placeholder} textarea rows="5" value={input} onChange={(e) => setInput(e.target.value)} />
       <Button className="mt-4" onClick={run}>Generate</Button>
       {error && <p className="mt-3 font-semibold text-red-600">{error}</p>}

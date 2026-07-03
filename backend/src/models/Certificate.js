@@ -12,6 +12,7 @@ const certificateSchema = new mongoose.Schema(
     score: Number,
     qrUrl: String,
     issueDate: { type: Date, default: Date.now },
+    completionDate: { type: Date, default: Date.now },
     verified: { type: Boolean, default: true },
     revokedAt: Date
   },

@@ -1,10 +1,10 @@
 export default function Button({ children, variant = "primary", className = "", ...props }) {
   const variants = {
-    primary: "blue-gradient text-white shadow-glow",
+    primary: "blue-gradient text-white shadow-lg",
     ghost: "bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/15",
-    light: "bg-white text-ink shadow-lg hover:bg-blue-50",
-    dark: "bg-navy text-white hover:bg-ink",
-    outline: "bg-transparent text-royal ring-1 ring-royal/30 hover:bg-blue-50"
+    light: "bg-white text-navy shadow-lg hover:bg-primary-light",
+    dark: "bg-navy text-white hover:bg-navy-light",
+    outline: "bg-transparent text-primary ring-1 ring-primary/30 hover:bg-primary-light"
   };
   return (
     <button

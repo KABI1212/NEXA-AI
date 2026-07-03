@@ -18,6 +18,8 @@ export async function createCertificateForProgress(user, course, progress) {
   const certificateId = `NXA-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 89999)}`;
   const verifyUrl = `${process.env.CLIENT_URL || "http://localhost:5173"}/verify/${certificateId}`;
   const qrUrl = await QRCode.toDataURL(verifyUrl);
+  const issueDate = new Date();
+  const completionDate = new Date();
 
   if (isLocalMode()) {
     return saveCertificate({
@@ -28,7 +30,9 @@ export async function createCertificateForProgress(user, course, progress) {
       courseName: course.title,
       instructorName: course.instructor,
       score: Math.round((progress.quizScore + progress.finalScore) / 2) || 92,
-      qrUrl
+      qrUrl,
+      issueDate: issueDate.toISOString(),
+      completionDate: completionDate.toISOString()
     });
   }
 
@@ -40,7 +44,9 @@ export async function createCertificateForProgress(user, course, progress) {
     courseName: course.title,
     instructorName: course.instructor,
     score: Math.round((progress.quizScore + progress.finalScore) / 2) || 92,
-    qrUrl
+    qrUrl,
+    issueDate,
+    completionDate
   });
 }
 
@@ -81,14 +87,14 @@ export const issueCertificate = asyncHandler(async (req, res) => {
 export const verifyCertificate = asyncHandler(async (req, res) => {
   if (isLocalMode()) {
     const certificate = await findCertificateByCode(req.params.certificateId);
-    if (!certificate || !certificate.verified || certificate.revokedAt) {
+    if (!certificate || certificate.revokedAt || !certificate.verified) {
       return res.status(404).json({ valid: false, message: "Certificate is not valid" });
     }
     return res.json({ valid: true, certificate });
   }
 
   const certificate = await Certificate.findOne({ certificateId: req.params.certificateId });
-  if (!certificate || !certificate.verified || certificate.revokedAt) {
+  if (!certificate || certificate.revokedAt || !certificate.verified) {
     return res.status(404).json({ valid: false, message: "Certificate is not valid" });
   }
   res.json({ valid: true, certificate });
@@ -97,6 +103,10 @@ export const verifyCertificate = asyncHandler(async (req, res) => {
 export const revokeCertificate = asyncHandler(async (req, res) => {
   if (isLocalMode()) {
     const certificate = await findCertificateById(req.params.id);
+    if (!certificate) {
+      res.status(404);
+      throw new Error("Certificate not found");
+    }
     const savedCertificate = await saveCertificate({
       ...certificate,
       verified: false,
@@ -110,5 +120,9 @@ export const revokeCertificate = asyncHandler(async (req, res) => {
     { verified: false, revokedAt: new Date() },
     { new: true }
   );
+  if (!certificate) {
+    res.status(404);
+    throw new Error("Certificate not found");
+  }
   res.json({ certificate });
 });

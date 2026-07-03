@@ -22,6 +22,22 @@ const slugify = (value = "") =>
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+const clampScore = (value) => Math.max(0, Math.min(100, Number(value) || 0));
+const normalizeProgressPatch = (body, course, existing = {}) => {
+  const validModuleIds = new Set((course.modules || []).map((module) => module._id.toString()));
+  const watchedModules = Array.isArray(body.watchedModules)
+    ? [...new Set(body.watchedModules.map(String).filter((id) => validModuleIds.has(id)))]
+    : existing.watchedModules || [];
+
+  return {
+    watchedModules,
+    assignmentsDone: Boolean(body.assignmentsDone ?? existing.assignmentsDone),
+    quizPassed: Boolean(body.quizPassed ?? existing.quizPassed),
+    finalPassed: Boolean(body.finalPassed ?? existing.finalPassed),
+    quizScore: clampScore(body.quizScore ?? existing.quizScore),
+    finalScore: clampScore(body.finalScore ?? existing.finalScore)
+  };
+};
 
 export const listCourses = asyncHandler(async (req, res) => {
   if (isLocalMode()) {
@@ -104,22 +120,29 @@ export const updateProgress = asyncHandler(async (req, res) => {
     }
 
     const existingProgress = await findProgress(req.user._id, course._id);
-    const progress = await saveProgress({
+    const merged = {
       ...existingProgress,
-      ...req.body,
+      ...normalizeProgressPatch(req.body, course, existingProgress),
       userId: req.user._id,
       courseId: course._id
-    });
+    };
 
-    const watchedCount = progress.watchedModules?.length || 0;
-    const watchedPercent = course.modules.length ? Math.round((watchedCount / course.modules.length) * 100) : 100;
-    progress.percentage = Math.min(100, watchedPercent);
-    progress.completed = progress.percentage === 100 && progress.assignmentsDone && progress.quizPassed && progress.finalPassed;
-    const savedProgress = await saveProgress(progress);
+    const watchedCount = merged.watchedModules?.length || 0;
+    merged.percentage = Math.min(
+      100,
+      course.modules.length ? Math.round((watchedCount / course.modules.length) * 100) : 100
+    );
+    merged.completed =
+      merged.percentage === 100 &&
+      merged.assignmentsDone &&
+      merged.quizPassed &&
+      merged.finalPassed;
+    const savedProgress = await saveProgress(merged);
 
     let certificate = await findCertificateByUserAndCourse(req.user._id, course._id);
-    if (savedProgress.completed && !certificate) certificate = await createCertificateForProgress(req.user, course, savedProgress);
-
+    if (savedProgress.completed && !certificate) {
+      certificate = await createCertificateForProgress(req.user, course, savedProgress);
+    }
     return res.json({ progress: savedProgress, certificate });
   }
 
@@ -129,11 +152,12 @@ export const updateProgress = asyncHandler(async (req, res) => {
     throw new Error("Course not found");
   }
 
-  const progress = await Progress.findOneAndUpdate(
-    { userId: req.user._id, courseId: course._id },
-    { $set: req.body },
-    { upsert: true, new: true }
-  );
+  let progress = await Progress.findOne({ userId: req.user._id, courseId: course._id });
+  const patch = normalizeProgressPatch(req.body, course, progress || {});
+  if (!progress) {
+    progress = new Progress({ userId: req.user._id, courseId: course._id });
+  }
+  Object.assign(progress, patch);
 
   const watchedCount = progress.watchedModules?.length || 0;
   const watchedPercent = course.modules.length ? Math.round((watchedCount / course.modules.length) * 100) : 100;

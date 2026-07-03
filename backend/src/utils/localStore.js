@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { defaultCourses } from "./courseCatalog.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,78 +27,18 @@ function createCourseModule(title, duration, assignment = "", videoUrl = "", not
 }
 
 function buildDefaultCourses() {
-  return [
-    {
-      _id: createId(),
-      title: "Full Stack Web Development",
-      slug: "full-stack-web-development",
-      category: "Web Development",
-      instructor: "Prof. Rahul Sharma",
-      level: "Beginner to Advanced",
-      price: 0,
-      premium: false,
-      description: "Master React, Node.js, Express, MongoDB, deployment, interviews, and portfolio projects.",
-      thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-      modules: [
-        createCourseModule("HTML, CSS and JavaScript Foundations", "52m", "Build a responsive landing page"),
-        createCourseModule("React and Component Architecture", "1h 20m", "Build a dashboard UI"),
-        createCourseModule("Node, Express and MongoDB APIs", "1h 35m", "Create REST API with auth"),
-        createCourseModule("Deployment and Career Portfolio", "48m", "Deploy full-stack app")
-      ],
-      quiz: [{ question: "Which library builds UI components?", options: ["React", "MongoDB", "JWT"], answer: "React" }],
-      finalTest: [{ question: "Which pattern protects APIs?", options: ["JWT auth", "Inline CSS", "Console logs"], answer: "JWT auth" }],
-      published: true,
-      createdAt: now(),
-      updatedAt: now()
-    },
-    {
-      _id: createId(),
-      title: "AI and Machine Learning Career Track",
-      slug: "ai-machine-learning-career-track",
-      category: "AI / Machine Learning",
-      instructor: "Dr. Meera Iyer",
-      level: "Beginner",
-      price: 0,
-      premium: false,
-      description: "Python, ML basics, model evaluation, prompt engineering, and AI product thinking.",
-      thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-      modules: [
-        createCourseModule("AI Foundations", "45m"),
-        createCourseModule("ML Projects", "1h"),
-        createCourseModule("Prompt Engineering", "40m")
-      ],
-      quiz: [],
-      finalTest: [],
-      published: true,
-      createdAt: now(),
-      updatedAt: now()
-    },
-    {
-      _id: createId(),
-      title: "Placement Prep and Communication",
-      slug: "placement-prep-communication",
-      category: "Placement Prep",
-      instructor: "Ananya Rao",
-      level: "Beginner",
-      price: 0,
-      premium: false,
-      description: "Aptitude, resume writing, HR answers, and confidence-building practice.",
-      thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978",
-      modules: [
-        createCourseModule("Aptitude Basics", "35m"),
-        createCourseModule("HR Interview Answers", "42m")
-      ],
-      quiz: [],
-      finalTest: [],
-      published: true,
-      createdAt: now(),
-      updatedAt: now()
-    }
-  ];
+  return defaultCourses.map((course) => ({
+    ...course,
+    _id: createId(),
+    modules: course.modules.map((module) => createCourseModule(module.title, module.duration, module.assignment, module.videoUrl, module.notesUrl)),
+    published: true,
+    createdAt: now(),
+    updatedAt: now()
+  }));
 }
 
 async function defaultStore() {
-  const password = await bcrypt.hash("Admin@12345", 12);
+  const password = await bcrypt.hash(process.env.LOCAL_ADMIN_PASSWORD || "Admin@12345", 12);
   return {
     users: [
       {
@@ -143,11 +84,17 @@ async function writeStore(store) {
   await fs.writeFile(dataFile, JSON.stringify(store, null, 2), "utf8");
 }
 
+let writeQueue = Promise.resolve();
+
 async function updateStore(mutator) {
-  const store = await readStore();
-  const result = await mutator(store);
-  await writeStore(store);
-  return result;
+  const run = async () => {
+    const store = await readStore();
+    const result = await mutator(store);
+    await writeStore(store);
+    return result;
+  };
+  writeQueue = writeQueue.then(run, run);
+  return writeQueue;
 }
 
 function sortByCreatedAtDesc(items) {
@@ -257,6 +204,34 @@ export async function saveCourse(course) {
   });
 }
 
+export async function replaceCourses(courses) {
+  return updateStore((store) => {
+    store.courses = courses.map((course) =>
+      withTimestamps(
+        {
+          price: 0,
+          premium: false,
+          published: true,
+          ...course,
+          _id: course._id || createId(),
+          modules: (course.modules || []).map((module) => ({
+            _id: module._id || createId(),
+            title: module.title || "",
+            videoUrl: module.videoUrl || "",
+            duration: module.duration || "",
+            notesUrl: module.notesUrl || "",
+            assignment: module.assignment || ""
+          }))
+        },
+        null
+      )
+    );
+    store.progress = [];
+    store.certificates = [];
+    return clone(store.courses);
+  });
+}
+
 export async function countPublishedCourses() {
   const store = await readStore();
   return store.courses.filter((course) => course.published !== false).length;
@@ -336,6 +311,7 @@ export async function saveCertificate(certificate) {
         verified: true,
         ceoName: "Kabilesh",
         issueDate: new Date().toISOString(),
+        completionDate: new Date().toISOString(),
         ...existing,
         ...certificate,
         _id: certificate._id || existing?._id || createId()
