@@ -67,10 +67,33 @@ export const dashboard = asyncHandler(async (req, res) => {
   });
 });
 
+const validateProfileUpdate = (data) => {
+  const errors = [];
+  if (data.name !== undefined) {
+    if (typeof data.name !== "string" || data.name.trim().length < 2 || data.name.trim().length > 50) {
+      errors.push("Name must be between 2 and 50 characters");
+    }
+  }
+  if (data.phone !== undefined) {
+    if (typeof data.phone !== "string" || !/^\+?[\d\s\-()]{10,15}$/.test(data.phone)) {
+      errors.push("Invalid phone number format. Use 10-15 digits with optional + prefix.");
+    }
+  }
+  return errors;
+};
+
 export const updateProfile = asyncHandler(async (req, res) => {
   const allowed = ["name", "phone", "role"];
   const publicRoles = new Set(["student", "fresher", "professional", "career-switcher", "job-seeker"]);
   const update = Object.fromEntries(Object.entries(req.body).filter(([key]) => allowed.includes(key)));
+
+  // Fix 5: Add input validation for profile updates
+  const validationErrors = validateProfileUpdate(update);
+  if (validationErrors.length > 0) {
+    res.status(400);
+    throw new Error(validationErrors.join("; "));
+  }
+
   if (update.role && !publicRoles.has(update.role)) {
     res.status(400);
     throw new Error("Invalid role");

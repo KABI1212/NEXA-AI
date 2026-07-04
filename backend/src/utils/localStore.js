@@ -1,3 +1,4 @@
+// @ts-nocheck
 import bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
 import { promises as fs } from "fs";
@@ -387,4 +388,44 @@ export async function saveTicket(ticket) {
 export async function countOpenTickets() {
   const store = await readStore();
   return store.tickets.filter((item) => item.status !== "closed").length;
+}
+
+// ─── Exports for persistentStore ─────────────────────────────────────────────
+
+/**
+ * Read the raw store object (for direct manipulation by persistentStore).
+ * @returns {Promise<Object>}
+ */
+export async function readRawStore() {
+  return readStore();
+}
+
+/**
+ * Write the raw store object directly (for persistentStore updates).
+ * @param {Object} store
+ * @returns {Promise<void>}
+ */
+export async function writeRawStore(store) {
+  await writeStore(store);
+}
+
+/**
+ * Run a mutator function on the store (for persistentStore updates).
+ * @param {Function} mutator - (store) => result
+ * @returns {Promise<any>}
+ */
+export async function updateStore(mutator) {
+  const run = async () => {
+    const store = await readStore();
+    const result = await mutator(store);
+    await writeStore(store);
+    return result;
+  };
+  writeQueue = writeQueue
+    .then(run)
+    .catch((error) => {
+      console.error("Queue operation failed:", error);
+      return run();
+    });
+  return writeQueue;
 }

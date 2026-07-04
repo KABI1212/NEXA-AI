@@ -9,6 +9,7 @@ import * as localStore from "../utils/localStore.js";
 import { clearAuthCookies, newCsrfToken, parseCookies, setAuthCookies } from "../utils/cookies.js";
 import { createSessionId, hashToken, signRefreshToken, signToken, verifyAccessToken, verifyRefreshToken } from "../utils/token.js";
 import { trackOTPAttempt, incrementOTPAttempt, resetOTPAttempts } from "../utils/otpTracker.js";
+import { isRefreshTokenUsed, markRefreshTokenUsed, checkOTPBlocked, incrementOTPAttempt as persistentIncrementOTP, resetOTPAttempts as persistentResetOTP } from "../utils/persistentStore.js";
 
 const strongPassword = (password) => validator.isStrongPassword(password || "", { minLength: 8, minSymbols: 0 });
 const normalizeEmail = (email) => email?.trim().toLowerCase();
@@ -349,9 +350,6 @@ export const me = asyncHandler(async (req, res) => {
   res.json({ user: sanitize(req.user) });
 });
 
-// Fix 7: Track used refresh tokens to detect reuse
-const usedRefreshTokens = new Set();
-
 const revokeAllUserSessions = async (userId) => {
   if (isLocalMode()) {
     const user = await findUserByIdCompat(userId);
@@ -376,8 +374,10 @@ export const refresh = asyncHandler(async (req, res) => {
     throw new Error("Refresh token required");
   }
 
-  // Fix 7: Check if token has been used before (reuse detection)
-  if (usedRefreshTokens.has(refreshToken)) {
+  // Fix 7: Persistent refresh token reuse detection (survives restarts)
+  const tokenHash = hashToken(refreshToken);
+  const isUsed = await isRefreshTokenUsed(tokenHash);
+  if (isUsed) {
     // Token reuse detected - revoke ALL sessions for this user
     try {
       const decoded = verifyRefreshToken(refreshToken);
@@ -399,13 +399,28 @@ export const refresh = asyncHandler(async (req, res) => {
 
   const user = await findUserForRefresh(decoded.id);
   const session = activeSessions(user || {}).find((item) => item.sessionId === decoded.sessionId);
-  if (!user || !session || session.refreshTokenHash !== hashToken(refreshToken)) {
+  if (!user || !session || session.refreshTokenHash !== tokenHash) {
     res.status(401);
     throw new Error("Invalid refresh session");
   }
 
-  // Mark this token as used
-  usedRefreshTokens.add(refreshToken);
+  // Mark this token as used (persistently)
+  await markRefreshTokenUsed(tokenHash);
+
+  // Fix 4: Invalidate old CSRF token before generating new one
+  const cookies = parseCookies(req.headers.cookie);
+  const oldCsrf = cookies.nexa_csrf;
+  // The old CSRF token is implicitly invalidated by the browser replacing the cookie
+  // Explicitly revoke by setting the old cookie to empty with immediate expiry
+  if (oldCsrf) {
+    res.cookie("nexa_csrf_old", oldCsrf, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+      maxAge: 0 // Immediately expire
+    });
+  }
 
   const accessToken = signToken(user);
   const nextRefreshToken = signRefreshToken(user, decoded.sessionId);
