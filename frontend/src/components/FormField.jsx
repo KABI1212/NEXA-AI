@@ -1,4 +1,3 @@
-// @ts-nocheck
 export default function FormField({ label, type = "text", value, onChange, error, placeholder, required, className = "" }) {
   return (
     <div className={`grid gap-1.5 ${className}`}>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { CalendarDays, Trophy, Award } from "lucide-react";
 
 // @ts-ignore

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import { api, apiError } from '../../services/api.js';
 import './CareerChat.css';

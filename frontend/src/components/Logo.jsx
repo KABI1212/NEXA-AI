@@ -1,4 +1,3 @@
-// @ts-nocheck
 import logoSvg from "../../assets/logo.svg";
 import logoLightSvg from "../../assets/logo-light.svg";
 import logoDarkSvg from "../../assets/logo-dark.svg";

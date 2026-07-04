@@ -2,6 +2,14 @@
 .env
 .env.local
 .env.production
+.env.development
+.env.staging
+.env.testing
+backend/.env
+frontend/.env
+backend/.env.development
+backend/.env.staging
+backend/.env.testing
 
 # Dependencies
 node_modules/

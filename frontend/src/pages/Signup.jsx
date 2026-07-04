@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, apiError } from "../services/api.js";
