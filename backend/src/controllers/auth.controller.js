@@ -5,9 +5,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { isLocalMode } from "../utils/dataMode.js";
 import { generateOtp, otpExpiry } from "../utils/otp.js";
 import { otpEmailTemplate, sendEmail } from "../utils/email.js";
-import { findUserByEmail, saveUser } from "../utils/localStore.js";
+import * as localStore from "../utils/localStore.js";
 import { clearAuthCookies, newCsrfToken, parseCookies, setAuthCookies } from "../utils/cookies.js";
-import { createSessionId, hashToken, signRefreshToken, signToken, verifyRefreshToken } from "../utils/token.js";
+import { createSessionId, hashToken, signRefreshToken, signToken, verifyAccessToken, verifyRefreshToken } from "../utils/token.js";
+import { trackOTPAttempt, incrementOTPAttempt, resetOTPAttempts } from "../utils/otpTracker.js";
 
 const strongPassword = (password) => validator.isStrongPassword(password || "", { minLength: 8, minSymbols: 0 });
 const normalizeEmail = (email) => email?.trim().toLowerCase();
@@ -30,7 +31,7 @@ function activeSessions(user) {
 }
 
 async function persistUser(user) {
-  if (isLocalMode()) return saveUser(user);
+  if (isLocalMode()) return localStore.saveUser(user);
   await user.save();
   return user;
 }
@@ -105,7 +106,7 @@ export const register = asyncHandler(async (req, res) => {
   }
 
   if (isLocalMode()) {
-    const exists = await findUserByEmail(normalizedEmail);
+    const exists = await localStore.findUserByEmail(normalizedEmail);
     if (exists?.verified) {
       res.status(409);
       throw new Error("Email already registered");
@@ -124,13 +125,14 @@ export const register = asyncHandler(async (req, res) => {
       otp,
       otpExpires: otpExpiry().toISOString()
     };
-    const savedUser = await saveUser(user);
+    const savedUser = await localStore.saveUser(user);
     await sendEmail({ to: savedUser.email, subject: "Verify your Nexa AI account", html: otpEmailTemplate(savedUser.name, otp) });
-    return res.status(201).json({
-      message: "OTP sent",
-      email: savedUser.email,
-      ...(process.env.NODE_ENV !== "production" && { devOtp: otp })
-    });
+    // Fix 5: Only expose devOtp with explicit DEBUG_OTP flag
+    const response = { message: "OTP sent", email: savedUser.email };
+    if (process.env.NODE_ENV !== "production" && process.env.DEBUG_OTP === "true") {
+      response.devOtp = otp;
+    }
+    return res.status(201).json(response);
   }
 
   const exists = await User.findOne({ email: normalizedEmail });
@@ -141,10 +143,12 @@ export const register = asyncHandler(async (req, res) => {
 
   const otp = generateOtp();
   let user;
+  // Fix 9: Hash password before storing (MongoDB path)
+  const hashedPassword = await bcrypt.hash(password, 12);
   if (exists) {
     exists.name = name;
     exists.phone = phone;
-    exists.password = password;
+    exists.password = hashedPassword;
     exists.role = safePublicRole(requestedRole, exists.role);
     exists.otp = otp;
     exists.otpExpires = otpExpiry();
@@ -154,7 +158,7 @@ export const register = asyncHandler(async (req, res) => {
       name,
       email: normalizedEmail,
       phone,
-      password,
+      password: hashedPassword,
       role: requestedRole,
       otp,
       otpExpires: otpExpiry()
@@ -170,7 +174,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
   const normalizedEmail = normalizeEmail(email);
 
   if (isLocalMode()) {
-    const user = await findUserByEmail(normalizedEmail);
+    const user = await localStore.findUserByEmail(normalizedEmail);
     if (!user || user.otp !== otp || !user.otpExpires || new Date(user.otpExpires) < new Date()) {
       res.status(400);
       throw new Error("Invalid or expired OTP");
@@ -178,7 +182,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
     user.verified = true;
     delete user.otp;
     delete user.otpExpires;
-    const savedUser = await saveUser(user);
+    const savedUser = await localStore.saveUser(user);
     return res.json(await issueSession(savedUser, req, res));
   }
 
@@ -202,19 +206,21 @@ export const resendOtp = asyncHandler(async (req, res) => {
   }
 
   if (isLocalMode()) {
-    const user = await findUserByEmail(normalizedEmail);
+    const user = await localStore.findUserByEmail(normalizedEmail);
     if (!user) {
       res.status(404);
       throw new Error("User not found");
     }
     user.otp = generateOtp();
     user.otpExpires = otpExpiry().toISOString();
-    await saveUser(user);
+    await localStore.saveUser(user);
     await sendEmail({ to: user.email, subject: "Your Nexa AI OTP", html: otpEmailTemplate(user.name, user.otp) });
-    return res.json({
-      message: "OTP resent",
-      ...(process.env.NODE_ENV !== "production" && { devOtp: user.otp })
-    });
+    // Fix 5: Only expose devOtp with explicit DEBUG_OTP flag
+    const resendResponse = { message: "OTP resent" };
+    if (process.env.NODE_ENV !== "production" && process.env.DEBUG_OTP === "true") {
+      resendResponse.devOtp = user.otp;
+    }
+    return res.json(resendResponse);
   }
 
   const user = await User.findOne({ email: normalizedEmail });
@@ -238,7 +244,7 @@ export const login = asyncHandler(async (req, res) => {
   }
 
   if (isLocalMode()) {
-    const user = await findUserByEmail(normalizedEmail);
+    const user = await localStore.findUserByEmail(normalizedEmail);
     if (user?.lockUntil && new Date(user.lockUntil) > new Date()) {
       res.status(423);
       throw new Error("Account temporarily locked. Try again later.");
@@ -280,16 +286,18 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   if (isLocalMode()) {
-    const user = await findUserByEmail(normalizedEmail);
+    const user = await localStore.findUserByEmail(normalizedEmail);
     if (!user) return res.json({ message: "If the email exists, OTP has been sent" });
     user.passwordResetOtp = generateOtp();
     user.passwordResetExpires = otpExpiry().toISOString();
-    await saveUser(user);
+    await localStore.saveUser(user);
     await sendEmail({ to: user.email, subject: "Reset your Nexa AI password", html: otpEmailTemplate(user.name, user.passwordResetOtp) });
-    return res.json({
-      message: "Password reset OTP sent",
-      ...(process.env.NODE_ENV !== "production" && { devOtp: user.passwordResetOtp })
-    });
+    // Fix 5: Only expose devOtp with explicit DEBUG_OTP flag
+    const forgotResponse = { message: "Password reset OTP sent" };
+    if (process.env.NODE_ENV !== "production" && process.env.DEBUG_OTP === "true") {
+      forgotResponse.devOtp = user.passwordResetOtp;
+    }
+    return res.json(forgotResponse);
   }
 
   const user = await User.findOne({ email: normalizedEmail });
@@ -310,7 +318,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
   }
 
   if (isLocalMode()) {
-    const user = await findUserByEmail(normalizedEmail);
+    const user = await localStore.findUserByEmail(normalizedEmail);
     if (!user || user.passwordResetOtp !== otp || !user.passwordResetExpires || new Date(user.passwordResetExpires) < new Date()) {
       res.status(400);
       throw new Error("Invalid or expired OTP");
@@ -319,7 +327,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
     delete user.passwordResetOtp;
     delete user.passwordResetExpires;
     user.sessions = [];
-    await saveUser(user);
+    await localStore.saveUser(user);
     return res.json({ message: "Password updated" });
   }
 
@@ -328,7 +336,8 @@ export const resetPassword = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid or expired OTP");
   }
-  user.password = password;
+  // Fix 9: Hash password before storing
+  user.password = await bcrypt.hash(password, 12);
   user.passwordResetOtp = undefined;
   user.passwordResetExpires = undefined;
   user.sessions = [];
@@ -340,11 +349,46 @@ export const me = asyncHandler(async (req, res) => {
   res.json({ user: sanitize(req.user) });
 });
 
+// Fix 7: Track used refresh tokens to detect reuse
+const usedRefreshTokens = new Set();
+
+const revokeAllUserSessions = async (userId) => {
+  if (isLocalMode()) {
+    const user = await findUserByIdCompat(userId);
+    if (user) {
+      user.sessions = (user.sessions || []).map((s) => ({ ...s, revokedAt: new Date().toISOString() }));
+      await localStore.saveUser(user);
+    }
+  } else {
+    const user = await User.findById(userId).select("+password");
+    if (user) {
+      user.sessions = (user.sessions || []).map((s) => ({ ...s, revokedAt: new Date() }));
+      await user.save();
+    }
+  }
+  console.warn(`[SECURITY] All sessions revoked for user: ${userId}`);
+};
+
 export const refresh = asyncHandler(async (req, res) => {
   const refreshToken = parseCookies(req.headers.cookie).nexa_refresh || req.body.refreshToken;
   if (!refreshToken) {
     res.status(401);
     throw new Error("Refresh token required");
+  }
+
+  // Fix 7: Check if token has been used before (reuse detection)
+  if (usedRefreshTokens.has(refreshToken)) {
+    // Token reuse detected - revoke ALL sessions for this user
+    try {
+      const decoded = verifyRefreshToken(refreshToken);
+      await revokeAllUserSessions(decoded.id);
+      console.warn(`[SECURITY] Refresh token reuse detected for user: ${decoded.id}`);
+    } catch {
+      // Token already expired or invalid
+    }
+    clearAuthCookies(res);
+    res.status(403);
+    throw new Error("Suspicious activity detected. All sessions have been revoked. Please login again.");
   }
 
   const decoded = verifyRefreshToken(refreshToken);
@@ -359,6 +403,9 @@ export const refresh = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalid refresh session");
   }
+
+  // Mark this token as used
+  usedRefreshTokens.add(refreshToken);
 
   const accessToken = signToken(user);
   const nextRefreshToken = signRefreshToken(user, decoded.sessionId);

@@ -129,11 +129,50 @@ export const AGENTS = {
     },
 };
 
+const MAX_CONVERSATIONS = 50;
+const MAX_MEMORIES = 100;
+const CONVERSATION_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
 export default class AgentOrchestrator {
     constructor() {
         this.agents = AGENTS;
         this.conversations = new Map();
         this.memories = new Map();
+        // Fix 17: Clean up old conversations and memories hourly
+        this.cleanupInterval = setInterval(() => this.cleanup(), 60 * 60 * 1000);
+    }
+
+    cleanup() {
+        const now = Date.now();
+
+        // Clean up old conversations
+        for (const [key, value] of this.conversations) {
+            if (now - value.lastAccessed > CONVERSATION_TTL) {
+                this.conversations.delete(key);
+            }
+        }
+
+        // Limit conversation map size
+        if (this.conversations.size > MAX_CONVERSATIONS) {
+            const sorted = Array.from(this.conversations.entries())
+                .sort((a, b) => a[1].lastAccessed - b[1].lastAccessed);
+            const toDelete = sorted.slice(0, this.conversations.size - MAX_CONVERSATIONS);
+            toDelete.forEach(([key]) => this.conversations.delete(key));
+        }
+
+        // Limit memories size
+        if (this.memories.size > MAX_MEMORIES) {
+            const sorted = Array.from(this.memories.entries())
+                .sort((a, b) => (a[1].timestamp || 0) - (b[1].timestamp || 0));
+            const toDelete = sorted.slice(0, this.memories.size - MAX_MEMORIES);
+            toDelete.forEach(([key]) => this.memories.delete(key));
+        }
+    }
+
+    destroy() {
+        if (this.cleanupInterval) {
+            clearInterval(this.cleanupInterval);
+        }
     }
 
     getAgent(agentId) {
@@ -184,17 +223,24 @@ export default class AgentOrchestrator {
 
     saveConversation(userId, sessionId, messages) {
         const key = `${userId}:${sessionId}`;
-        this.conversations.set(key, messages);
+        this.conversations.set(key, { messages, lastAccessed: Date.now() });
     }
 
     getConversation(userId, sessionId) {
-        return this.conversations.get(`${userId}:${sessionId}`) || [];
+        const entry = this.conversations.get(`${userId}:${sessionId}`);
+        if (entry) {
+            entry.lastAccessed = Date.now();
+            return entry.messages;
+        }
+        return [];
     }
 
     saveMemory(userId, key, value) {
         const userKey = `user:${userId}`;
-        if (!this.memories.has(userKey)) this.memories.set(userKey, {});
-        this.memories.get(userKey)[key] = value;
+        const existing = this.memories.get(userKey) || { timestamp: Date.now() };
+        existing[key] = value;
+        existing.timestamp = Date.now();
+        this.memories.set(userKey, existing);
     }
 
     getMemory(userId, key) {

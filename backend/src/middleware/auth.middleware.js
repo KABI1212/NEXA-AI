@@ -1,10 +1,53 @@
 // @ts-nocheck
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import User from "../models/User.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { isLocalMode } from "../utils/dataMode.js";
 import { findUserById } from "../utils/localStore.js";
 import { parseCookies } from "../utils/cookies.js";
+
+// Fix 11: CSRF token generation with expiration (prevents replay attacks)
+const csrfTokens = new Map();
+
+export const generateCsrfToken = (userId) => {
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiresAt = Date.now() + 30 * 60 * 1000; // 30 minutes
+
+  // Invalidate old tokens for this user
+  if (csrfTokens.has(userId)) {
+    const userTokens = csrfTokens.get(userId);
+    for (const [existingToken, data] of userTokens) {
+      if (data.expiresAt < Date.now()) {
+        userTokens.delete(existingToken);
+      }
+    }
+  }
+
+  if (!csrfTokens.has(userId)) {
+    csrfTokens.set(userId, new Map());
+  }
+  csrfTokens.get(userId).set(token, { expiresAt });
+  return token;
+};
+
+export const validateCsrfToken = (userId, token) => {
+  const userTokens = csrfTokens.get(userId);
+  if (!userTokens) return false;
+
+  const tokenData = userTokens.get(token);
+  if (!tokenData) return false;
+
+  // Check expiry
+  if (tokenData.expiresAt < Date.now()) {
+    userTokens.delete(token);
+    return false;
+  }
+
+  // Invalidate token after use (prevent replay)
+  userTokens.delete(token);
+  return true;
+};
 
 function readAccessToken(req) {
   const header = req.headers.authorization || "";
@@ -90,9 +133,21 @@ export function requireCsrf(req, res, next) {
     res.status(403);
     return next(new Error("Missing CSRF token"));
   }
+
+  // Fix 11: Enhanced CSRF validation with token expiry check
   if (cookieToken !== headerToken) {
     res.status(403);
     return next(new Error("Invalid CSRF token"));
   }
+
+  // If user is authenticated, validate their CSRF token exists in our store
+  if (req.user && req.user._id) {
+    const isValid = validateCsrfToken(String(req.user._id), headerToken);
+    if (!isValid) {
+      res.status(403);
+      return next(new Error("CSRF token expired or already used"));
+    }
+  }
+
   next();
 }

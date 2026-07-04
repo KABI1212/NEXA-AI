@@ -38,7 +38,12 @@ function buildDefaultCourses() {
 }
 
 async function defaultStore() {
-  const password = await bcrypt.hash(process.env.LOCAL_ADMIN_PASSWORD || "Admin@12345", 12);
+  // Fix 6: Warn about weak admin password
+  const adminPassword = process.env.LOCAL_ADMIN_PASSWORD;
+  if (!adminPassword || adminPassword === "Admin@12345") {
+    console.warn("⚠️  WARNING: Using weak admin password. Set LOCAL_ADMIN_PASSWORD in .env");
+  }
+  const password = await bcrypt.hash(adminPassword || require("crypto").randomBytes(16).toString("hex"), 12);
   return {
     users: [
       {
@@ -93,7 +98,13 @@ async function updateStore(mutator) {
     await writeStore(store);
     return result;
   };
-  writeQueue = writeQueue.then(run, run);
+  // Fix 14: Proper error handling in write queue to prevent race conditions
+  writeQueue = writeQueue
+    .then(run)
+    .catch((error) => {
+      console.error("Queue operation failed:", error);
+      return run(); // Retry once
+    });
   return writeQueue;
 }
 

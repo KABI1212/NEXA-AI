@@ -18,8 +18,9 @@ function readCookie(name) {
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("nexa_token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
+  // Fix 16: Cookies are automatically URL-decoded when read via document.cookie
   const csrfToken = readCookie("nexa_csrf");
-  if (csrfToken) config.headers["X-CSRF-Token"] = decodeURIComponent(csrfToken);
+  if (csrfToken) config.headers["X-CSRF-Token"] = csrfToken;
   return config;
 });
 

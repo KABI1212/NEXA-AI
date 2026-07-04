@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import QRCode from "qrcode";
 import Certificate from "../models/Certificate.js";
 import Course from "../models/Course.js";
@@ -14,10 +15,16 @@ import {
   saveCertificate
 } from "../utils/localStore.js";
 
+// Fix 19: Strong Certificate ID Generation
+const generateCertificateId = () => {
+  const year = new Date().getFullYear();
+  const random = crypto.randomBytes(4).toString('hex').toUpperCase();
+  const timestamp = Date.now().toString(36).toUpperCase();
+  return `NXA-${year}-${timestamp}-${random}`;
+};
+
 export async function createCertificateForProgress(user, course, progress) {
-  const certificateId = `NXA-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 89999)}`;
-  const verifyUrl = `${process.env.CLIENT_URL || "http://localhost:5173"}/verify/${certificateId}`;
-  const qrUrl = await QRCode.toDataURL(verifyUrl);
+  const certificateId = generateCertificateId();
   const issueDate = new Date();
   const completionDate = new Date();
 
@@ -30,7 +37,7 @@ export async function createCertificateForProgress(user, course, progress) {
       courseName: course.title,
       instructorName: course.instructor,
       score: Math.round((progress.quizScore + progress.finalScore) / 2) || 92,
-      qrUrl,
+      // Fix 15: Don't store QR code - generate on-demand
       issueDate: issueDate.toISOString(),
       completionDate: completionDate.toISOString()
     });
@@ -44,11 +51,27 @@ export async function createCertificateForProgress(user, course, progress) {
     courseName: course.title,
     instructorName: course.instructor,
     score: Math.round((progress.quizScore + progress.finalScore) / 2) || 92,
-    qrUrl,
     issueDate,
     completionDate
   });
 }
+
+// Fix 15: Generate QR on-the-fly when requested
+export const getCertificateQR = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const certificate = isLocalMode()
+    ? await findCertificateById(id)
+    : await Certificate.findById(id);
+
+  if (!certificate) {
+    return res.status(404).json({ error: "Certificate not found" });
+  }
+
+  const verifyUrl = `${process.env.CLIENT_URL || "http://localhost:5173"}/verify/${certificate.certificateId}`;
+  const qrCode = await QRCode.toDataURL(verifyUrl);
+
+  res.json({ qrCode });
+});
 
 export const myCertificates = asyncHandler(async (req, res) => {
   if (isLocalMode()) {
