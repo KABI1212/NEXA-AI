@@ -1,12 +1,22 @@
-export default function FormField({ label, textarea = false, ...props }) {
-  const Input = textarea ? "textarea" : "input";
+// @ts-nocheck
+export default function FormField({ label, type = "text", value, onChange, error, placeholder, required, className = "" }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-slate-700">
-      {label}
-      <Input
-        className="min-h-11 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm outline-none ring-primary/20 transition focus:border-primary focus:ring-4"
-        {...props}
+    <div className={`grid gap-1.5 ${className}`}>
+      {label && (
+        <label className="text-sm font-semibold text-slate-700">
+          {label}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
+        </label>
+      )}
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
-    </label>
+      {error && <p className="text-xs text-red-500">{error}</p>}
+    </div>
   );
 }

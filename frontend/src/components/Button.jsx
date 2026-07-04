@@ -1,17 +1,43 @@
-export default function Button({ children, variant = "primary", className = "", ...props }) {
-  const variants = {
-    primary: "blue-gradient text-white shadow-lg",
-    ghost: "bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/15",
-    light: "bg-white text-navy shadow-lg hover:bg-primary-light",
-    dark: "bg-navy text-white hover:bg-navy-light",
-    outline: "bg-transparent text-primary ring-1 ring-primary/30 hover:bg-primary-light"
-  };
+import { forwardRef } from "react";
+
+const variants = {
+  primary: "bg-primary hover:bg-primary-dark text-white shadow-lg shadow-primary/25 hover:shadow-primary/40",
+  outline: "border-2 border-primary text-primary hover:bg-primary hover:text-white",
+  ghost: "text-slate-600 hover:bg-slate-100",
+  accent: "bg-accent hover:bg-emerald-600 text-white shadow-lg shadow-accent/25",
+  danger: "bg-red-600 hover:bg-red-700 text-white",
+  gold: "bg-gradient-to-r from-yellow-500 to-amber-600 text-white shadow-lg shadow-yellow-500/25",
+  gradient: "bg-gradient-to-r from-primary via-blue-500 to-accent text-white shadow-lg shadow-blue-500/25",
+};
+
+const sizes = {
+  sm: "px-3 py-1.5 text-xs",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3 text-base",
+  xl: "px-10 py-4 text-lg",
+};
+
+const Button = forwardRef(function Button(
+  { variant = "primary", size = "md", className = "", children, disabled, loading, ...props },
+  ref
+) {
+  const base = "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed";
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`}
+      ref={ref}
+      className={`${base} ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${className}`}
+      disabled={disabled || loading}
       {...props}
     >
+      {loading && (
+        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+        </svg>
+      )}
       {children}
     </button>
   );
-}
+});
+
+export default Button;

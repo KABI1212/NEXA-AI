@@ -1,3 +1,9 @@
-export default function Card({ children, className = "" }) {
-  return <div className={`rounded-lg border border-slate-200 bg-white p-5 text-slate-900 shadow-sm ${className}`}>{children}</div>;
+export default function Card({ className = "", children, hover = true, ...props }) {
+  const base = "bg-white rounded-xl p-5 border border-slate-100 shadow-sm";
+  const hoverClass = hover ? "hover:shadow-md hover:border-primary/20 transition-all duration-300" : "";
+  return (
+    <div className={`${base} ${hoverClass} ${className}`} {...props}>
+      {children}
+    </div>
+  );
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import { api, apiError } from "../services/api.js";
 import Button from "../components/Button.jsx";

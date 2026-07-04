@@ -3,15 +3,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: "#0f4fd8", dark: "#0a3aa0", light: "#e6f1fb" },
-        accent: { DEFAULT: "#d4a017", light: "#faeeda" },
-        navy: { DEFAULT: "#07152f", light: "#0d2045" },
-        gold: "#d4a017",
+        primary: { DEFAULT: "#2563EB", dark: "#1D4ED8", light: "#DBEAFE" },
+        accent: { DEFAULT: "#14B8A6", light: "#CCFBF1" },
+        navy: { DEFAULT: "#0F172A", light: "#1E293B" },
+        sky: "#38BDF8",
+        gold: "#D4A017",
       },
       fontFamily: {
-        serif: ['"Times New Roman"', "Times", "serif"],
-        sans: ['"Times New Roman"', "Times", "serif"],
-        mono: ['"Times New Roman"', "Times", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        heading: ["Poppins", "sans-serif"],
       },
     },
   },

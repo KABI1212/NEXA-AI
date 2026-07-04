@@ -1,1 +1,0 @@
-import{j as s}from"./index-BeOqRDIs.js";function o({children:r,className:e=""}){return s.jsx("div",{className:`rounded-lg border border-slate-200 bg-white p-5 text-slate-900 shadow-sm ${e}`,children:r})}export{o as C};

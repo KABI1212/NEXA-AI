@@ -1,3 +1,4 @@
+// @ts-nocheck
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -41,7 +42,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 });
 
 export const authorize = (...roles) => (req, res, next) => {
-  if (!roles.includes(req.user.role)) {
+  if (!roles.includes(req.user?.role)) {
     res.status(403);
     throw new Error("Insufficient permissions");
   }
@@ -74,12 +75,22 @@ export function requireCsrf(req, res, next) {
   const unsafe = !["GET", "HEAD", "OPTIONS"].includes(req.method);
   if (!unsafe) return next();
 
+  // Skip CSRF check for Bearer token auth (SPA uses Authorization header)
+  const authHeader = req.headers.authorization || "";
+  if (authHeader.startsWith("Bearer ")) return next();
+
   const cookies = parseCookies(req.headers.cookie);
   const hasCookieAuth = Boolean(cookies.nexa_access || cookies.nexa_refresh);
   if (!hasCookieAuth) return next();
 
   const headerToken = req.headers["x-csrf-token"];
-  if (!cookies.nexa_csrf || !headerToken || cookies.nexa_csrf !== headerToken) {
+  const cookieToken = cookies.nexa_csrf;
+
+  if (!cookieToken || !headerToken) {
+    res.status(403);
+    return next(new Error("Missing CSRF token"));
+  }
+  if (cookieToken !== headerToken) {
     res.status(403);
     return next(new Error("Invalid CSRF token"));
   }

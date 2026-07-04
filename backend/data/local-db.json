@@ -26,7 +26,35 @@
       "role": "admin",
       "verified": true,
       "createdAt": "2026-04-28T16:53:12.981Z",
-      "updatedAt": "2026-04-29T09:51:26.610Z"
+      "updatedAt": "2026-07-03T18:38:17.456Z",
+      "failedLoginAttempts": 0,
+      "loginHistory": [
+        {
+          "success": true,
+          "reason": "login",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "",
+          "createdAt": "2026-07-03T18:38:17.454Z"
+        },
+        {
+          "success": false,
+          "reason": "Invalid credentials",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "",
+          "createdAt": "2026-07-03T18:36:57.634Z"
+        }
+      ],
+      "sessions": [
+        {
+          "sessionId": "1c7bc28d-fd52-4cb5-9bd9-86737ba0ad6c",
+          "refreshTokenHash": "726493ef8e4c4620b616b9730adea8a4a2ba87836d874ba05ee8a03f9f38a6b3",
+          "createdAt": "2026-07-03T18:38:17.454Z",
+          "lastUsedAt": "2026-07-03T18:38:17.454Z",
+          "expiresAt": "2026-07-10T18:38:17.454Z",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": ""
+        }
+      ]
     },
     {
       "active": true,
@@ -52,8 +80,17 @@
       "otpExpires": "2026-04-28T17:03:15.901Z",
       "_id": "c18d89e7-4b62-414d-83be-0e5f97339516",
       "createdAt": "2026-04-28T16:53:15.905Z",
-      "updatedAt": "2026-07-03T17:29:00.434Z",
+      "updatedAt": "2026-07-03T18:38:51.162Z",
       "sessions": [
+        {
+          "sessionId": "6ef6f20d-f28b-405e-9646-a409181d7ff2",
+          "refreshTokenHash": "02d32347514762932367753c41bc44ad3e841ff876d97848326adcb84696067a",
+          "createdAt": "2026-07-03T18:38:51.158Z",
+          "lastUsedAt": "2026-07-03T18:38:51.158Z",
+          "expiresAt": "2026-07-10T18:38:51.158Z",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+        },
         {
           "sessionId": "0fefa249-67f2-44e1-9c61-3db4a25d105e",
           "refreshTokenHash": "46dad5b54b537850e968cc4c40f0c8d42742f6b708489f41edd0345632cd3052",
@@ -66,6 +103,27 @@
       ],
       "failedLoginAttempts": 0,
       "loginHistory": [
+        {
+          "success": true,
+          "reason": "login",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0",
+          "createdAt": "2026-07-03T18:38:51.159Z"
+        },
+        {
+          "success": false,
+          "reason": "Invalid credentials",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "",
+          "createdAt": "2026-07-03T18:38:02.736Z"
+        },
+        {
+          "success": false,
+          "reason": "Invalid credentials",
+          "ip": "::ffff:127.0.0.1",
+          "userAgent": "",
+          "createdAt": "2026-07-03T18:37:16.865Z"
+        },
         {
           "success": true,
           "reason": "login",
@@ -1041,6 +1099,66 @@
       },
       "createdAt": "2026-07-03T17:29:38.928Z",
       "updatedAt": "2026-07-03T17:29:38.928Z"
+    },
+    {
+      "_id": "dc9f04ed-7d02-4588-be74-4985999a59cb",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-07-03T18:39:03.883Z",
+      "updatedAt": "2026-07-03T18:39:03.883Z"
+    },
+    {
+      "_id": "f809a571-9008-4aee-9dbc-6e2b022b7949",
+      "userId": "c18d89e7-4b62-414d-83be-0e5f97339516",
+      "type": "career",
+      "title": "Career Explorer",
+      "data": {
+        "bestCareers": [
+          "Full Stack Developer",
+          "AI Engineer",
+          "Cloud Developer"
+        ],
+        "salaryRange": "₹6 LPA - ₹28 LPA",
+        "roadmap": [
+          "HTML/CSS/JS",
+          "React + Node",
+          "Databases",
+          "Cloud deployment",
+          "Portfolio projects"
+        ],
+        "companiesHiring": [
+          "TCS",
+          "Infosys",
+          "Wipro",
+          "Google",
+          "Amazon"
+        ]
+      },
+      "createdAt": "2026-07-03T18:39:09.713Z",
+      "updatedAt": "2026-07-03T18:39:09.713Z"
     }
   ],
   "tickets": []
