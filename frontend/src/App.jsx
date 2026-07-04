@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import CareerChat from "./features/career/CareerChat.jsx";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
 
@@ -18,6 +19,7 @@ const Reports = lazy(() => import("./pages/dashboard/Reports.jsx"));
 const Settings = lazy(() => import("./pages/dashboard/Settings.jsx"));
 const Admin = lazy(() => import("./pages/dashboard/Admin.jsx"));
 const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate.jsx"));
+const CareerChatPage = lazy(() => import("./pages/dashboard/CareerChat.jsx"));
 
 function PrivateRoute({ children }) {
   const { token, user } = useAuth();
@@ -52,6 +54,7 @@ export default function App() {
         >
           <Route index element={<DashboardHome />} />
           <Route path="career-explorer" element={<AiTools tool="career" />} />
+          <Route path="career-chat" element={<CareerChatPage />} />
           <Route path="resume-analyzer" element={<AiTools tool="resume" />} />
           <Route path="interview-prep" element={<AiTools tool="interview" />} />
           <Route path="company-insights" element={<AiTools tool="company" />} />

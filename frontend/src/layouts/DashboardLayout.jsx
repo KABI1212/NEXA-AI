@@ -4,13 +4,14 @@ import { useState } from "react";
 import {
   Award, BarChart3, Bot, Brain, BriefcaseBusiness, Building2, FileText,
   Gauge, GraduationCap, LogOut, MessageCircle, Settings, Shield,
-  ChevronLeft, Menu, X, Bell, Sparkles
+  ChevronLeft, Menu, X, Bell, Sparkles, MessageSquare
 } from "lucide-react";
 import Logo from "../components/Logo.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 const links = [
   ["Dashboard", "/dashboard", Gauge],
+  ["Career Chat", "/dashboard/career-chat", MessageSquare],
   ["Career Explorer", "/dashboard/career-explorer", Brain],
   ["Courses", "/dashboard/courses", GraduationCap],
   ["Certificates", "/dashboard/certificates", Award],

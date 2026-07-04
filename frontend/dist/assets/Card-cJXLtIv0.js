@@ -1,1 +1,0 @@
-import{j as d}from"./index-DGzBG0sS.js";function i({className:r="",children:o,hover:s=!0,...e}){const a="bg-white rounded-xl p-5 border border-slate-100 shadow-sm",t=s?"hover:shadow-md hover:border-primary/20 transition-all duration-300":"";return d.jsx("div",{className:`${a} ${t} ${r}`,...e,children:o})}export{i as C};

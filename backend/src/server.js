@@ -12,6 +12,7 @@ import certificateRoutes from "./routes/certificate.routes.js";
 import aiRoutes from "./routes/ai.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import reportRoutes from "./routes/report.routes.js";
+import careerRoutes from "./routes/career.routes.js";
 import { errorHandler, notFound } from "./middleware/error.middleware.js";
 import { requireCsrf } from "./middleware/auth.middleware.js";
 import { globalLimiter, authLimiter, otpLimiter, resetLimiter } from "./middleware/rateLimiter.js";
@@ -100,6 +101,7 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/career", careerRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
